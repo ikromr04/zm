@@ -39,7 +39,7 @@ class TagsController extends Controller
   public function get()
   {
     try {
-      return Tag::orderBy('title', 'asc')->get();
+      return Tag::with('group')->orderBy('title', 'asc')->get();
     } catch (\Throwable $th) {
       return response([
         'message' => 'Не удалось найти данные',
@@ -55,7 +55,10 @@ class TagsController extends Controller
       if ($tag) {
         return response(['message' => 'Тег уже существует'], 400);
       }
-      $tag = Tag::create(['title' => $request->title]);
+      $tag = Tag::create([
+        'title' => $request->title,
+        'group_id' => $request->group_id ?? NULL,
+      ]);
 
       return response([
         'tag' => $tag,
@@ -70,6 +73,7 @@ class TagsController extends Controller
   {
     $tag = Tag::find(request('id'));
     $tag->title = request('title');
+    $tag->group_id = request('group_id') ?? NULL;
 
     try {
       $tag->update();

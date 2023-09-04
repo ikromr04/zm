@@ -32,6 +32,14 @@ export const ApiRoute = {
     'delete': '/tag/:id',
     'multidelete': '/tag-delete',
   },
+  Groups: {
+    'index': '/groups',
+    'store': '/groups',
+    'show': '/groups/:id',
+    'update': '/groups/:id',
+    'delete': '/groups/:id',
+    'multidelete': '/groups-delete',
+  },
   Posts: {
     'index': '/post',
     'store': '/post',

@@ -1,7 +1,7 @@
 import { Breadcrumbs, Link, Typography } from '@mui/material';
 import React from 'react'
 import { AppRoute } from '../../../const';
-import TagsBoard from '../../ui/tags-board';
+import TagsBoard from '../../ui/tags-board/tags-board';
 
 function TagsPage() {
   return (

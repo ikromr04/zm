@@ -118,7 +118,7 @@ export default function QuotesBoard() {
 
       <DataGrid
         sx={{ backgroundColor: 'white' }}
-        autoHeight
+        
         rows={rows}
         columns={columns}
         pageSize={20}

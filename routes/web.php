@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\QuotesController;
 use App\Http\Controllers\TagsController;
@@ -47,6 +48,13 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::post('/tag/{id}', [TagsController::class, 'update']);
     Route::delete('/tag/{tag}', [TagsController::class, 'destroy']);
     Route::post('/tag-delete', [TagsController::class, 'multidelete']);
+
+    Route::get('/groups', [GroupController::class, 'get']);
+    Route::post('/groups', [GroupController::class, 'store']);
+    Route::get('/groups/{id}', [GroupController::class, 'show']);
+    Route::post('/groups/{id}', [GroupController::class, 'update']);
+    Route::delete('/groups/{tag}', [GroupController::class, 'destroy']);
+    Route::post('/groups-delete', [GroupController::class, 'multidelete']);
 
     Route::get('/post', [PostsController::class, 'index']);
     Route::post('/post', [PostsController::class, 'store']);
