@@ -21,6 +21,10 @@ function PageNavigation() {
           <ListItemText primary="Теги" />
         </ListItemButton>
 
+        <ListItemButton href={AppRoute.Groups}>
+          <ListItemText primary="Группы" />
+        </ListItemButton>
+
         <ListItemButton href={AppRoute.Posts['index']}>
           <ListItemText primary="Картинки" />
         </ListItemButton>

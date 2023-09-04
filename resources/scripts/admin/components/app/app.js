@@ -9,6 +9,7 @@ import TagsPage from '../pages/tags-page/tags-page';
 import PostsIndex from '../pages/posts';
 import PostsCreate from '../pages/posts/create';
 import PostsEdit from '../pages/posts/edit';
+import GroupsPage from '../pages/groups-page/groups-page';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path={AppRoute.Quotes['edit']} element={<QuotesEdit />} />
 
           <Route path={AppRoute.Tags} element={<TagsPage />} />
+          <Route path={AppRoute.Groups} element={<GroupsPage />} />
 
           <Route path={AppRoute.Posts['index']} element={<PostsIndex />} />
           <Route path={AppRoute.Posts['create']} element={<PostsCreate />} />

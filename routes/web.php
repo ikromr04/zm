@@ -53,7 +53,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::post('/groups', [GroupController::class, 'store']);
     Route::get('/groups/{id}', [GroupController::class, 'show']);
     Route::post('/groups/{id}', [GroupController::class, 'update']);
-    Route::delete('/groups/{tag}', [GroupController::class, 'destroy']);
+    Route::delete('/groups/{group}', [GroupController::class, 'destroy']);
     Route::post('/groups-delete', [GroupController::class, 'multidelete']);
 
     Route::get('/post', [PostsController::class, 'index']);
