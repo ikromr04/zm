@@ -11,6 +11,7 @@ import {
   Grid,
   TextField
 } from '@mui/material';
+import SortableList from './sortable-list';
 
 export default function GroupsBoard() {
   const [rows, setRows] = useState([]);
@@ -170,6 +171,9 @@ export default function GroupsBoard() {
           processRowUpdate={handleProcessRowUpdate}
           getRowHeight={() => 'auto'}
         />
+      </Grid>
+      <Grid item xs={5}>
+        <SortableList />
       </Grid>
     </Grid>
   );

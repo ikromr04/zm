@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GroupSort;
 use App\Models\Post;
 use App\Models\Quote;
 use App\Models\Tag;
@@ -16,7 +17,14 @@ class TagsController extends Controller
     $data = new stdClass();
     $data->posts = Post::latest()->get();
     $data->tags = Tag::orderBy('title', 'asc')->get();
-    $data->groups = TagsGroup::orderBy('title', 'asc')->get();
+
+    $sort = GroupSort::first();
+    $groups = TagsGroup::get();
+    $sortOrder = array_flip(json_decode($sort->sort));
+
+    $data->groups = $groups->sortBy(function ($group) use ($sortOrder) {
+      return $sortOrder[$group->id] ?? 999999;
+    })->values();
 
     return view('pages.tags.index', compact('data'));
   }
@@ -31,7 +39,13 @@ class TagsController extends Controller
       $q->whereIn('id', $tagId);
     })->paginate(10);
 
-    $data->groups = TagsGroup::orderBy('title', 'asc')->get();
+    $sort = GroupSort::first();
+    $groups = TagsGroup::get();
+    $sortOrder = array_flip(json_decode($sort->sort));
+
+    $data->groups = $groups->sortBy(function ($group) use ($sortOrder) {
+      return $sortOrder[$group->id] ?? 999999;
+    })->values();
 
     return view('pages.tags.selected', compact('data'));
   }

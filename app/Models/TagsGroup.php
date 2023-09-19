@@ -23,6 +23,6 @@ class TagsGroup extends Model
 
   public function tags()
   {
-    return $this->hasMany(Tag::class, 'group_id');
+    return $this->hasMany(Tag::class, 'group_id')->orderBy('title');
   }
 }

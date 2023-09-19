@@ -49,12 +49,14 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::delete('/tag/{tag}', [TagsController::class, 'destroy']);
     Route::post('/tag-delete', [TagsController::class, 'multidelete']);
 
-    Route::get('/groups', [GroupController::class, 'get']);
+    // Route::get('/groups', [GroupController::class, 'get']);
     Route::post('/groups', [GroupController::class, 'store']);
     Route::get('/groups/{id}', [GroupController::class, 'show']);
     Route::post('/groups/{id}', [GroupController::class, 'update']);
     Route::delete('/groups/{group}', [GroupController::class, 'destroy']);
     Route::post('/groups-delete', [GroupController::class, 'multidelete']);
+    Route::get('/groups', [GroupController::class, 'get']);
+    Route::post('/groups-sort', [GroupController::class, 'updateSort']);
 
     Route::get('/post', [PostsController::class, 'index']);
     Route::post('/post', [PostsController::class, 'store']);

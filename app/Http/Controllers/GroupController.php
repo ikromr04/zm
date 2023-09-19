@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GroupSort;
 use App\Models\Tag;
 use App\Models\TagsGroup;
 use Illuminate\Http\Request;
@@ -11,12 +12,36 @@ class GroupController extends Controller
   public function get()
   {
     try {
-      return TagsGroup::orderBy('title', 'asc')->get();
+      $sort = GroupSort::first();
+      $groups = TagsGroup::get();
+      $sortOrder = array_flip(json_decode($sort->sort));
+
+      $sortedGroups = $groups->sortBy(function ($group) use ($sortOrder) {
+        return $sortOrder[$group->id] ?? 999999;
+      })->values();
+
+      return $sortedGroups;
     } catch (\Throwable $th) {
       return response([
         'message' => 'Не удалось найти данные',
         'error' => $th,
       ]);
+    }
+  }
+
+  public function updateSort(Request $request)
+  {
+    try {
+      $sort = GroupSort::first();
+      $sort->sort = json_encode($request->sort);
+      $sort->update();
+
+      return response([
+        'sort' => $sort->sort,
+        'message' => 'Порядок успешно сохранен',
+      ], 200);
+    } catch (\Throwable $th) {
+      return $th;
     }
   }
 

@@ -40,6 +40,7 @@ export const ApiRoute = {
     'update': '/groups/:id',
     'delete': '/groups/:id',
     'multidelete': '/groups-delete',
+    'sort': '/groups-sort',
   },
   Posts: {
     'index': '/post',
