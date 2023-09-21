@@ -39,7 +39,7 @@
             height: 24px;
             color: #111;
           "
-          href="https://twitter.com/zafar_mirzo"
+          href="https://twitter.com/ZafarMirzo"
           title="Твиттер"
           target="_blank"
         >
