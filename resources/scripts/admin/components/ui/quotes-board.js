@@ -50,11 +50,9 @@ export default function QuotesBoard() {
 
   const handleOnExport = () => {
     const sheetData = rows.map((quote) => ({
-      'Цитаты': quote.quote,
+      'Мысли': quote.quote,
       'Теги': quote.tags,
     }));
-    console.log(sheetData);
-    console.log(rows);
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(sheetData);
     XLSX.utils.book_append_sheet(wb, ws, 'sheet1');
