@@ -10,6 +10,7 @@ import { ApiRoute, AppRoute } from '../../const';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import dayjs from 'dayjs';
+import * as XLSX from 'xlsx/xlsx.mjs';
 
 export default function QuotesBoard() {
   const [rows, setRows] = useState([]);
@@ -45,6 +46,19 @@ export default function QuotesBoard() {
         .post(ApiRoute.Quotes['multidelete'], { ids: selection })
         .then(() => setRows([...rows.filter((row) => !selection.includes(row.id))]))
         .catch(({ response }) => toast.error(response.data.message));
+  };
+
+  const handleOnExport = () => {
+    const sheetData = rows.map((quote) => ({
+      'Цитаты': quote.quote,
+      'Теги': quote.tags,
+    }));
+    console.log(sheetData);
+    console.log(rows);
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(sheetData);
+    XLSX.utils.book_append_sheet(wb, ws, 'sheet1');
+    XLSX.writeFile(wb, "QuotesExcel.xlsx");
   };
 
   const columns = [
@@ -101,6 +115,12 @@ export default function QuotesBoard() {
       <Stack direction="row" justifyContent="right" marginBottom={1} spacing={1}>
         <Button
           variant="contained"
+          onClick={handleOnExport}
+        >
+          Экспорт в excel
+        </Button>
+        <Button
+          variant="contained"
           color="error"
           disabled={!selection.length}
           onClick={handleDeleteSelectedButtonClick}
@@ -118,7 +138,7 @@ export default function QuotesBoard() {
 
       <DataGrid
         sx={{ backgroundColor: 'white' }}
-        
+
         rows={rows}
         columns={columns}
         pageSize={20}

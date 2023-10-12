@@ -31,7 +31,8 @@
     "react-smooth-dnd": "^0.11.1",
     "react-sortable-hoc": "^2.0.0",
     "react-toastify": "^9.1.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "axios": "^0.21",
