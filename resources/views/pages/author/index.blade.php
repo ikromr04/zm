@@ -23,7 +23,7 @@
 
     <div class="author-page__info">
       <p class="author-page__info-item">
-        Социальный предприниматель и председатель.Также занимаюсь философским творчеством.
+        Предприниматель и писатель | Философия, Космология, Жизненные ценности, Современный человек и Личностный рост.
       </p>
       <p class="author-page__info-item">
         1 Мая 1972
@@ -39,7 +39,7 @@
             height: 24px;
             color: #111;
           "
-          href="https://twitter.com/ZafarMirzo"
+          href="https://twitter.com/zafarmirzo"
           title="Твиттер"
           target="_blank"
         >
