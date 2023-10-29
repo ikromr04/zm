@@ -47,16 +47,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/tag/{id}', [TagsController::class, 'show']);
     Route::post('/tag/{id}', [TagsController::class, 'update']);
     Route::delete('/tag/{tag}', [TagsController::class, 'destroy']);
-    Route::post('/tag-delete', [TagsController::class, 'multidelete']);
-
-    // Route::get('/groups', [GroupController::class, 'get']);
-    Route::post('/groups', [GroupController::class, 'store']);
-    Route::get('/groups/{id}', [GroupController::class, 'show']);
-    Route::post('/groups/{id}', [GroupController::class, 'update']);
-    Route::delete('/groups/{group}', [GroupController::class, 'destroy']);
-    Route::post('/groups-delete', [GroupController::class, 'multidelete']);
-    Route::get('/groups', [GroupController::class, 'get']);
-    Route::post('/groups-sort', [GroupController::class, 'updateSort']);
+    Route::post('/hierarchy', [TagsController::class, 'hierarchy']);
 
     Route::get('/post', [PostsController::class, 'index']);
     Route::post('/post', [PostsController::class, 'store']);

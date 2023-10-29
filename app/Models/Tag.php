@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Kalnoy\Nestedset\NodeTrait;
 
 class Tag extends Model
 {
-  use HasFactory, Sluggable;
+  use HasFactory, Sluggable, NodeTrait {
+    Sluggable::replicate insteadof NodeTrait;
+  }
 
   protected $guarded = [];
 

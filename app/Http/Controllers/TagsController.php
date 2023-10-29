@@ -18,14 +18,6 @@ class TagsController extends Controller
     $data->posts = Post::latest()->get();
     $data->tags = Tag::orderBy('title', 'asc')->get();
 
-    $sort = GroupSort::first();
-    $groups = TagsGroup::get();
-    $sortOrder = array_flip(json_decode($sort->sort));
-
-    $data->groups = $groups->sortBy(function ($group) use ($sortOrder) {
-      return $sortOrder[$group->id] ?? 999999;
-    })->values();
-
     return view('pages.tags.index', compact('data'));
   }
 
@@ -53,7 +45,7 @@ class TagsController extends Controller
   public function get()
   {
     try {
-      return Tag::with('group')->orderBy('title', 'asc')->get();
+      return Tag::defaultOrder()->get()->toTree();
     } catch (\Throwable $th) {
       return response([
         'message' => 'Не удалось найти данные',
@@ -113,16 +105,12 @@ class TagsController extends Controller
     }
   }
 
-  public function multidelete(Request $request)
+  public function hierarchy(Request $request)
   {
     try {
-      foreach ((array) request('ids') as $id) {
-        $tag = Tag::find($id);
-        $tag->quotes()->detach();
-        $tag->delete();
-      }
+      Tag::rebuildTree($request->hierarchy, false);
 
-      return response(['message' => 'Теги успешно удалены'], 200);
+      return response(['message' => 'Данные успешно сохранены'], 200);
     } catch (\Throwable $th) {
       return $th;
     }

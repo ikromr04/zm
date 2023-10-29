@@ -17,7 +17,7 @@ class CreateTagsTable extends Migration
       $table->id();
       $table->string('title');
       $table->string('slug')->unique();
-      $table->integer('group_id')->nullable();
+      $table->nestedSet();
       $table->timestamps();
     });
   }
@@ -29,6 +29,8 @@ class CreateTagsTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('tags');
+    Schema::table('table', function (Blueprint $table) {
+      $table->dropNestedSet();
+    });
   }
 }

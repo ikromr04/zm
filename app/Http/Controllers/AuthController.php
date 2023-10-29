@@ -20,7 +20,7 @@ class AuthController extends Controller
       'password' => 'required',
     ]);
 
-    $user = User::where('login', '=', $request->login)->first();
+    $user = User::where('email', '=', $request->login)->first();
 
     if (!$user) {
       return response(['error' => 'Пользователь не найден'], 400);

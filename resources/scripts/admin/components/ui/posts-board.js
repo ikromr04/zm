@@ -133,6 +133,7 @@ export default function PostsBoard() {
         disableSelectionOnClick
         onSelectionModelChange={(newSelectionModel) => setSelection(newSelectionModel)}
         localeText={dataGridLocalText}
+        autoHeight
       />
     </>
   );

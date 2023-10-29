@@ -1,219 +1,88 @@
-import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Stack } from '@mui/system';
 import { toast } from 'react-toastify';
-import { ApiRoute, dataGridLocalText } from '../../../const';
-import { generatePath } from 'react-router-dom';
-import {
-  Box,
-  Button,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField
-} from '@mui/material';
-import Groups from './groups';
+import { ApiRoute } from '../../../const';
+import { Button, Stack } from '@mui/material';
+import { useNestedSet } from '../../../hooks/use-nested-set';
 
 export default function TagsBoard() {
-  const [rows, setRows] = useState([]);
-  const [selection, setSelection] = useState([]);
-  const [groups, setGroups] = useState([]);
-  const [groupId, setGroupId] = useState(0);
+  const [tags, setTags] = useState(null);
+  const [hierarchy, setHierarchy] = useState(null);
+  const [changed, setChanged] = useState(false);
+  const ref = useNestedSet((hierarchy) => {
+    setHierarchy(hierarchy);
+    setChanged(true);
+  });
 
   useEffect(() => {
-    axios
+    !tags && axios
       .get(ApiRoute.Tags['index'])
       .then(({ data }) => {
-        setRows(data.map(({ id, title, group }) => ({ id, title, group_id: group?.id })));
+        setTags(data);
       })
       .catch(({ response }) => toast.error(response.data.message));
+  }, [tags]);
 
-    axios
-      .get(ApiRoute.Groups['index'])
+  const handleSaveButtonClick = () => {
+    hierarchy && axios
+      .post(ApiRoute.Tags['hierarchy'], { hierarchy })
       .then(({ data }) => {
-        setGroups(data.map(({ id, title }) => ({ id, title })));
-      })
-      .catch(({ response }) => toast.error(response.data.message));
-  }, []);
-
-  const handleDeleteButtonClick = (id, title) => () => {
-    const isConfirmed = window.confirm(
-      `Вы уверены что хотите безвозвратно удалить ${title}?`
-    );
-
-    isConfirmed &&
-      axios
-        .delete(generatePath(ApiRoute.Tags['delete'], { id }))
-        .then(({ data }) => {
-          toast.success(data.message);
-          setRows([...rows.filter((row) => row.id !== id)]);
-        })
-        .catch((error) => console.log(error));
-  };
-
-  const handleFormSubmit = (evt) => {
-    evt.preventDefault();
-
-    axios
-      .post(ApiRoute.Tags['store'], {
-        title: evt.target.title.value,
-        group_id: evt.target.group_id.value,
-      })
-      .then(({ data }) => {
-        toast.success(data.message);
-        setRows([data.tag, ...rows])
-        evt.target.reset();
+        toast.success(data.message)
       })
       .catch(({ response }) => toast.error(response.data.message));
   };
 
-  const handleProcessRowUpdate = (newRow) => {
-    axios
-      .post(ApiRoute.Tags['update'], newRow)
-      .then(({ data }) => toast.success(data.message))
-      .catch((error) => console.log(error));
-
-    return newRow;
+  const handleCancelButtonClick = () => {
+    setChanged(false);
+    setTags(null);
   }
 
-  const handleDeleteSelectedButtonClick = () => {
-    window.confirm(
-      `Вы уверены что хотите безвозвратно удалить выбранные?
-      \nВыбрано ${selection.length}`
-    ) &&
-      axios
-        .post(ApiRoute.Tags['multidelete'], { ids: selection })
-        .then(() => setRows([...rows.filter((row) => !selection.includes(row.id))]))
-        .catch((error) => console.log(error));
-  };
-
-  const columns = [
-    {
-      field: 'id',
-      headerName: 'ID',
-      align: 'center',
-      headerAlign: 'center',
-      width: 80,
-    },
-    {
-      field: 'title',
-      headerName: 'Название',
-      width: 320,
-      editable: true,
-    },
-    {
-      field: 'group_id',
-      headerName: 'Группа',
-      width: 340,
-      editable: true,
-      renderCell: (params) => (
-        <Groups
-          value={params.row.group_id ?? 0}
-          groups={groups}
-          row={params.row}
-        />
-      ),
-    },
-    {
-      field: 'actions',
-      headerName: 'Действия',
-      width: 120,
-      align: 'right',
-      headerAlign: 'center',
-      renderCell: (params) => (
-        <Stack spacing={1} direction="row" alignItems="center">
-          <Button
-            variant="contained"
-            color="error"
-            size="small"
-            onClick={handleDeleteButtonClick(params.row.id, params.row.title)}
-          >
-            Удалить
-          </Button>
-        </Stack>
-      ),
-    },
-  ];
-
   return (
-    <Grid container spacing={2} marginTop={0}>
-      <Grid item xs={10}>
-        <Stack direction="row" justifyContent="right" marginBottom={1} spacing={1}>
-          <Button
-            variant="contained"
-            color="error"
-            disabled={!selection.length}
-            onClick={handleDeleteSelectedButtonClick}
-          >
-            Удалить выбранные ({selection.length})
-          </Button>
-        </Stack>
-        <Box
-          component="form"
-          sx={{
-            padding: 2,
-            backgroundColor: 'white',
-            borderRadius: 1,
-            display: 'flex',
-            gap: 1,
-            marginBottom: 1,
-          }}
-          onSubmit={handleFormSubmit}
+    <>
+      <Stack direction="row" justifyContent="right" marginBottom={1} spacing={1}>
+        <Button
+          variant="contained"
+          color="success"
+          disabled={!changed}
+          onClick={handleSaveButtonClick}
         >
-          <TextField
-            fullWidth
-            name="title"
-            type="text"
-            label="Название"
-            placeholder="Введите название категории"
-            required
-            size="small"
-          />
-          <FormControl fullWidth>
-            <InputLabel id="groups" size="small">Группа</InputLabel>
-            <Select
-              labelId="groups"
-              id="groups"
-              name="group_id"
-              label="Группа"
-              size="small"
-              value={groupId}
-              onChange={(evt) => setGroupId(evt.target.value)}
-            >
-              <MenuItem value={0}></MenuItem>
-              {groups?.map(({id, title}) => (<MenuItem key={id} value={id}>{title}</MenuItem>))}
-            </Select>
-          </FormControl>
+          Сохранить
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
+          disabled={!changed}
+          onClick={handleCancelButtonClick}
+        >
+          Отмена
+        </Button>
+      </Stack>
 
-          <Button
-            type="submit"
-            color="success"
-            variant="contained"
-            sx={{ width: '160px', padding: '0 32px' }}
+      <ol ref={ref} className="nested-list">
+        {tags?.map(({ id, title, children}) => (
+          <li
+            key={id}
+            className="nested-list__item"
+            data-item={JSON.stringify({ id, title })}
           >
-            Добавить
-          </Button>
-        </Box>
+            <div className="nested-list__draggable">{title}</div>
 
-        <DataGrid
-          sx={{ backgroundColor: 'white'}}
-          autoHeight
-          rows={rows}
-          columns={columns}
-          pageSize={20}
-          rowsPerPageOptions={[20]}
-          checkboxSelection
-          disableSelectionOnClick
-          experimentalFeatures={{ newEditingApi: true }}
-          localeText={dataGridLocalText}
-          onSelectionModelChange={(newSelectionModel) => setSelection(newSelectionModel)}
-          processRowUpdate={handleProcessRowUpdate}
-          getRowHeight={() => 'auto'}
-        />
-      </Grid>
-    </Grid>
+            {children.length ?
+              <ol>
+                {children.map(({ id, title }) => (
+                  <li
+                    key={id}
+                    className="nested-list__item"
+                    data-item={JSON.stringify({ id, title })}
+                  >
+                    <div className="nested-list__draggable">{title}</div>
+                  </li>
+                ))}
+              </ol> : ''
+            }
+          </li>
+        ))}
+      </ol>
+    </>
   );
 }

@@ -22,7 +22,12 @@ function PageWrapper() {
         <Container
           disableGutters
           maxWidth="lg"
-          sx={{ m: 2, }}
+          sx={{
+            m: 2,
+            marginBottom: '80px',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
         >
           <Outlet />
         </Container>

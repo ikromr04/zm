@@ -11,6 +11,8 @@
   <link rel="apple-touch-icon" href="{{ asset('favicons/180x180.png') }}">
   <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
 
+  <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+
   <title>Админ панель ZM</title>
 </head>
 
@@ -18,6 +20,9 @@
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div class="page__root" id="root"></div>
 
+  <script src="{{ asset('plugins/jquery/jquery-3.6.4.min.js') }}"></script>
+  <script src="{{ asset('plugins/jquery/jquery-ui.min.js') }}"></script>
+  <script src="{{ asset('plugins/jq-nested/jq-nested-sortable.js') }}"></script>
   <script src="{{ asset('js/admin.min.js') }}"></script>
 </body>
 

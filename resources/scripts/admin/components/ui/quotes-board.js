@@ -136,7 +136,6 @@ export default function QuotesBoard() {
 
       <DataGrid
         sx={{ backgroundColor: 'white' }}
-
         rows={rows}
         columns={columns}
         pageSize={20}
@@ -146,6 +145,7 @@ export default function QuotesBoard() {
         disableSelectionOnClick
         onSelectionModelChange={(newSelectionModel) => setSelection(newSelectionModel)}
         localeText={dataGridLocalText}
+        autoHeight
       />
     </>
   );

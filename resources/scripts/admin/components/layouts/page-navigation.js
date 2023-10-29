@@ -1,7 +1,10 @@
 import { Box, List, ListItemButton, ListItemText } from '@mui/material';
 import { AppRoute } from '../../const';
+import { useLocation } from 'react-router-dom';
 
 function PageNavigation() {
+  const location = useLocation();
+
   return (
     <Box sx={{
       borderRight: '1px solid rgba(0, 0, 0, 0.12)',
@@ -13,19 +16,15 @@ function PageNavigation() {
           <ListItemText primary="Вернуться на сайт" />
         </ListItemButton>
 
-        <ListItemButton href={AppRoute.Quotes['index']}>
+        <ListItemButton href={AppRoute.Quotes['index']} selected={location.pathname.startsWith(AppRoute.Quotes['index'])}>
           <ListItemText primary="Мысли" />
         </ListItemButton>
 
-        <ListItemButton href={AppRoute.Tags}>
+        <ListItemButton href={AppRoute.Tags} selected={location.pathname.startsWith(AppRoute.Tags)}>
           <ListItemText primary="Теги" />
         </ListItemButton>
 
-        <ListItemButton href={AppRoute.Groups}>
-          <ListItemText primary="Группы" />
-        </ListItemButton>
-
-        <ListItemButton href={AppRoute.Posts['index']}>
+        <ListItemButton href={AppRoute.Posts['index']} selected={location.pathname.startsWith(AppRoute.Posts['index'])}>
           <ListItemText primary="Картинки" />
         </ListItemButton>
 

@@ -7,7 +7,6 @@ export const AppRoute = {
     'edit': '/admin/quotes/:id/edit',
   },
   Tags: '/admin/tags',
-  Groups: '/admin/groups',
   Posts: {
     'index': '/admin/posts',
     'create': '/admin/posts/create',
@@ -31,16 +30,7 @@ export const ApiRoute = {
     'show': '/tag/:id',
     'update': '/tag/:id',
     'delete': '/tag/:id',
-    'multidelete': '/tag-delete',
-  },
-  Groups: {
-    'index': '/groups',
-    'store': '/groups',
-    'show': '/groups/:id',
-    'update': '/groups/:id',
-    'delete': '/groups/:id',
-    'multidelete': '/groups-delete',
-    'sort': '/groups-sort',
+    'hierarchy': '/hierarchy',
   },
   Posts: {
     'index': '/post',
