@@ -13,7 +13,7 @@ class QuotesController extends Controller
   {
     $data = new stdClass();
     $data->quote = Quote::where('slug', $slug)->first();
-    $data->tags = Tag::orderBy('title', 'asc')->get();
+    $data->tags = Tag::defaultOrder()->get()->toTree();
 
     return view('pages.quotes.selected', compact('data'));
   }

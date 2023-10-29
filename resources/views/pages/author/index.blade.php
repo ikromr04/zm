@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('links')
-  <link rel="stylesheet" href="{{ asset('css/pages/author/index.min.css') }}">
-@endsection
-
 @section('content')
   <main class="author-page container">
     <div class="author-page__author">

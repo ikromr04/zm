@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('links')
-  <link rel="stylesheet" href="{{ asset('css/pages/index.min.css') }}">
-@endsection
-
 @section('content')
   <main class="home-page container">
     <h1 class="visually-hidden">Философское творчество</h1>

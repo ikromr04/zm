@@ -1,65 +1,10 @@
 @extends('layouts.app')
 
-@section('links')
-  <link rel="stylesheet" href="{{ asset('css/pages/tags/selected.min.css') }}">
-@endsection
-
 @section('content')
   <main class="tag-selected container">
     <h1 class="visually-hidden">Философское творчество</h1>
 
-    <aside class="tags">
-      <h2 class="tags__title title">
-        <button class="tags__button" type="button">
-          Теги
-          <svg class="tags__button-icon" width="9" height="12">
-            <use xlink:href="{{ asset('images/stack.svg') }}#arrow" />
-          </svg>
-        </button>
-      </h2>
-
-      <ul class="tags__list">
-        @foreach ($data->tags as $tag)
-          @if (!$tag->group_id)
-            @if ($tag->id !== $data->selectedTag->id)
-              <li class="tags__item">
-                <a class="tags__link" href="{{ route('tags.selected', $tag->slug) }}">
-                  {{ $tag->title }}
-                </a>
-              </li>
-            @else
-              <li class="tags__item">
-                <a class="tags__link tags__link--current">
-                  {{ $data->selectedTag->title }}
-                </a>
-              </li>
-            @endif
-          @endif
-        @endforeach
-        @foreach ($data->groups as $group)
-          <li class="tags__item">
-            <h3 style="margin: 16px 0 0 0">
-              {{ $group->title }}
-            </h3>
-          </li>
-          @foreach ($group->tags as $tag)
-            @if ($tag->id !== $data->selectedTag->id)
-              <li class="tags__item">
-                <a class="tags__link" href="{{ route('tags.selected', $tag->slug) }}">
-                  {{ $tag->title }}
-                </a>
-              </li>
-            @else
-              <li class="tags__item">
-                <a class="tags__link tags__link--current">
-                  {{ $data->selectedTag->title }}
-                </a>
-              </li>
-            @endif
-          @endforeach
-        @endforeach
-      </ul>
-    </aside>
+    <x-tags-sidebar :tags="$data->tags" :selectedTag="$data->selectedTag" />
 
     <section class="quotes">
       <h2 class="visually-hidden">Мысли автора</h2>

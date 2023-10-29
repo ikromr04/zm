@@ -1,30 +1,15 @@
 @extends('layouts.app')
 
-@section('links')
-  <link rel="stylesheet" href="{{ asset('css/pages/tags/index.min.css') }}">
-@endsection
-
 @section('content')
   <main class="tags-page container">
     <div class="tags-page__right">
       <h1 class="tags-page__title title">Теги</h1>
 
-      <ul class="tags-page__list">
-        @foreach ($data->tags as $tag)
-          @if (!$tag->group_id)
-            <li class="tags-page__list-item">
-              <a class="tags-page__list-link" href="{{ route('tags.selected', $tag->slug) }}">
-                {{ $tag->title }}
-              </a>
-            </li>
-          @endif
-        @endforeach
-      </ul>
+      @foreach ($data->tags as $tag)
+        <h3 style="margin-bottom: 0">{{ $tag->title }}</h3>
 
-      @foreach ($data->groups as $group)
-        <h3 style="margin-bottom: 0">{{ $group->title }}</h3>
         <ul class="tags-page__list">
-          @foreach ($group->tags as $tag)
+          @foreach ($tag->children as $tag)
             <li class="tags-page__list-item">
               <a class="tags-page__list-link" href="{{ route('tags.selected', $tag->slug) }}">
                 {{ $tag->title }}
