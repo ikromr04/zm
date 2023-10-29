@@ -18,29 +18,13 @@ export const useNestedSet = (onChange) => {
         excludeRoot: true,
         maxLevels: 2,
         isTree: true,
+        expandOnHover: 700,
         startCollapsed: false,
         branchClass: 'nested-list__item--branch',
         expandedClass: 'nested-list__item--expanded',
         leafClass: 'nested-list__item--leaf',
         hoveringClass: 'nested-list__item--hover',
-        relocate: () => {
-          const hierarchy = [];
-          document.querySelectorAll('.nested-list>li').forEach((item) => {
-            const category = JSON.parse(item.dataset.item);
-
-            item.querySelectorAll('li')?.forEach((child, index) => {
-              const categoryChild = JSON.parse(child.dataset.item);
-              if (index === 0) {
-                category.children = [categoryChild];
-              } else {
-                category.children.push(categoryChild);
-              }
-            });
-
-            hierarchy.push(category);
-          });
-          onChange(hierarchy);
-        },
+        relocate: () => onChange(),
       });
     }
 

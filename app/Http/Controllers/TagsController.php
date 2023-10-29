@@ -31,8 +31,6 @@ class TagsController extends Controller
       $q->whereIn('id', $tagId);
     })->paginate(10);
 
-    $sort = GroupSort::first();
-    $groups = TagsGroup::get();
     $sortOrder = array_flip(json_decode($sort->sort));
 
     $data->groups = $groups->sortBy(function ($group) use ($sortOrder) {
@@ -108,7 +106,7 @@ class TagsController extends Controller
   public function hierarchy(Request $request)
   {
     try {
-      Tag::rebuildTree($request->hierarchy, false);
+      Tag::rebuildTree($request->hierarchy, true);
 
       return response(['message' => 'Данные успешно сохранены'], 200);
     } catch (\Throwable $th) {
