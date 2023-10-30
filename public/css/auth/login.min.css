@@ -40,6 +40,9 @@ img {
   font-size: 22px;
   line-height: 26px;
 }
+.title--secondary {
+  color: #e2b65c;
+}
 
 .button {
   display: inline-flex;
@@ -65,10 +68,27 @@ img {
   transition: 0.3s;
   cursor: pointer;
 }
+.button:disabled {
+  opacity: 0.6;
+}
+.button--secondary {
+  background-color: #e2b65c;
+}
 @media (min-width: 1200px) {
   .button:hover {
     background-color: #e2b65c;
   }
+}
+
+.text {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #000000;
+  line-height: 24px;
+  font-size: 16px;
+}
+.text--error {
+  color: #DC0000;
 }
 
 .login {

@@ -32,4 +32,19 @@
   <symbol id="twitter" viewBox="0 0 24 24">
     <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
   </symbol>
+  <symbol id="user" fill="none" viewBox="0 0 17 18">
+    <path d="M15.17 16.5c0-2.3-2.99-4.17-6.67-4.17-3.68 0-6.67 1.87-6.67 4.17M8.5 9.83a4.17 4.17 0 1 1 0-8.33 4.17 4.17 0 0 1 0 8.33Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="favorite" fill="none" viewBox="0 0 15 18">
+    <path d="M12.5 0h-10a2 2 0 0 0-2 2v16l7-3 7 3V2a2 2 0 0 0-2-2Zm0 15-5-2.18-5 2.18V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v12Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="profile-settings" fill="none" viewBox="0 0 21 20">
+    <path d="M14.5 13.62a1.12 1.12 0 1 0 0-2.24 1.12 1.12 0 0 0 0 2.24Z" fill="currentColor"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5 14.5c-.73 0-2.19.36-2.24 1.08a2.74 2.74 0 0 0 4.48 0c-.05-.72-1.51-1.08-2.24-1.08Z" fill="currentColor"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 8.09V3.27L8 0 .5 3.27v4.91C.5 12.72 3.7 16.97 8 18a9.17 9.17 0 0 0 1.6-.55 6 6 0 1 0 5.9-9.36ZM8.5 14c0 .56.08 1.11.23 1.62-.24.11-.48.22-.73.3a8.2 8.2 0 0 1-5.5-7.74v-3.6L8 2.18l5.5 2.4v3.51a6 6 0 0 0-5 5.91Zm6 4a4 4 0 1 1 0-8 4 4 0 0 1 0 8Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="camera" fill="none" viewBox="0 0 14 12">
+    <path d="M7 8.67a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" fill="currentColor"/>
+    <path d="M12.33 1.33h-2.11l-.83-.9C9.15.16 8.8 0 8.41 0H5.6c-.38 0-.74.16-.99.43l-.82.9H1.67c-.74 0-1.34.6-1.34 1.34v8c0 .73.6 1.33 1.34 1.33h10.66c.74 0 1.34-.6 1.34-1.33v-8c0-.74-.6-1.34-1.34-1.34ZM7 10a3.33 3.33 0 1 1 0-6.67A3.33 3.33 0 0 1 7 10Z" fill="currentColor"/>
+  </symbol>
 </svg>

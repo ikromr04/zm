@@ -3,6 +3,24 @@
     <x-main-logo />
 
     <x-main-navigation />
+
+    @if (session('user'))
+      <x-profile />
+    @else
+      <button
+        class="login-link"
+        type="button"
+      >
+        <svg
+          class="main-navigation__link-icon"
+          width="20"
+          height="20"
+        >
+          <use xlink:href="{{ asset('images/stack.svg') }}#user" />
+        </svg>
+        Вход
+      </button>
+    @endif
   </div>
 
   <template id="menu-toggler">
@@ -13,3 +31,5 @@
     </button>
   </template>
 </header>
+
+<x-login-modal />

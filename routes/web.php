@@ -7,6 +7,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\QuotesController;
 use App\Http\Controllers\TagsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,14 +25,15 @@ Route::post('/auth/check', [AuthController::class, 'check'])->name('auth.check')
 Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::get('/auth/login', [AuthController::class, 'login'])->name('auth.login');
 
-Route::group(['middleware' => ['AuthCheck']], function () {
-  Route::get('/', [AppController::class, 'index'])->name('home');
-  Route::get('/thoughts/search', [QuotesController::class, 'search'])->name('quotes.search');
-  Route::get('/thoughts/{slug}', [QuotesController::class, 'selected'])->name('quotes.selected');
-  Route::get('/tags', [TagsController::class, 'index'])->name('tags');
-  Route::get('/tags/{slug}', [TagsController::class, 'selected'])->name('tags.selected');
-  Route::get('/author', [AuthorController::class, 'index'])->name('author');
+Route::get('/', [AppController::class, 'index'])->name('home');
+Route::get('/thoughts/search', [QuotesController::class, 'search'])->name('quotes.search');
+Route::get('/thoughts/{slug}', [QuotesController::class, 'selected'])->name('quotes.selected');
+Route::get('/tags', [TagsController::class, 'index'])->name('tags');
+Route::get('/tags/{slug}', [TagsController::class, 'selected'])->name('tags.selected');
+Route::get('/author', [AuthorController::class, 'index'])->name('author');
+Route::post('/users/{userId}/avatar', [UserController::class, 'updateAvatar']);
 
+Route::group(['middleware' => ['AuthCheck']], function () {
   Route::group(['middleware' => ['AdminCheck']], function () {
     Route::view('/admin/{path?}', 'admin')->where('path', '.*');
 

@@ -37,6 +37,10 @@ img {
   font-weight: 500;
   font-size: 22px;
   line-height: 26px;
+
+  &--secondary {
+    color: $base-secondary;
+  }
 }
 
 .button {
@@ -62,9 +66,29 @@ img {
   transition: 0.3s;
   cursor: pointer;
 
+  &:disabled {
+    opacity: 0.6;
+  }
+
+  &--secondary {
+    background-color: $base-secondary;
+  }
+
   @include desktop {
     &:hover {
       background-color: $base-secondary;
     }
+  }
+}
+
+.text {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: $base-black;
+  line-height: 24px;
+  font-size: 16px;
+
+  &--error {
+    color: #DC0000;
   }
 }

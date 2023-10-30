@@ -29,6 +29,30 @@
     Об авторе
   </a>
 
+  @if (session('user'))
+    <button
+      class="main-navigation__link main-navigation__link--account"
+      type="button"
+      onclick="window.toggleProfileModal()"
+    >
+      {{ session('user')->name }}
+    </button>
+  @else
+    <button
+      class="main-navigation__link main-navigation__link--login"
+      type="button"
+    >
+      <svg
+        class="main-navigation__link-icon"
+        width="20"
+        height="20"
+      >
+        <use xlink:href="{{ asset('images/stack.svg') }}#user" />
+      </svg>
+      Вход
+    </button>
+  @endif
+
   <button
     class="main-navigation__link main-navigation__link--search"
     type="button"

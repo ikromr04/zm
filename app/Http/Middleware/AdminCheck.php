@@ -17,7 +17,7 @@ class AdminCheck
    */
   public function handle(Request $request, Closure $next)
   {
-    $user = User::find(session()->get('user'));
+    $user = User::find(session()->get('user')->id);
 
     if ($user->role == 'admin') {
       return $next($request);

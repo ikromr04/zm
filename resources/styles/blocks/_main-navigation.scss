@@ -11,6 +11,10 @@
   @include tablet {
     width: auto;
     flex-direction: row;
+    gap: 0;
+  }
+
+  @include desktop {
     gap: 8px;
   }
 }
@@ -43,6 +47,11 @@
     &--current {
       opacity: 1;
       background-color: $base-secondary;
+    }
+
+    &--login,
+    &--account {
+      display: none;
     }
   }
 }
