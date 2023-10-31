@@ -33,3 +33,5 @@
 </header>
 
 <x-login-modal />
+<x-register-modal />
+<x-forgot-modal />

@@ -90,6 +90,9 @@ img {
 .text--error {
   color: #DC0000;
 }
+.text--success {
+  color: #66bb6a;
+}
 
 .page {
   font-family: "Roboto", sans-serif;
@@ -1261,6 +1264,10 @@ img {
   justify-content: space-between;
   gap: 0 16px;
 }
+.form__links a {
+  max-width: -moz-max-content;
+  max-width: max-content;
+}
 
 .form__submit {
   margin-top: 8px;
@@ -1349,6 +1356,19 @@ img {
 
 .modal__button {
   max-width: none;
+}
+
+.modal__back {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  max-width: -moz-max-content;
+  max-width: max-content;
+  gap: 8px;
+  font-weight: 500;
+  margin-top: 16px;
 }
 
 .profile {

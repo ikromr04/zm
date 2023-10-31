@@ -31,6 +31,10 @@ Route::get('/thoughts/{slug}', [QuotesController::class, 'selected'])->name('quo
 Route::get('/tags', [TagsController::class, 'index'])->name('tags');
 Route::get('/tags/{slug}', [TagsController::class, 'selected'])->name('tags.selected');
 Route::get('/author', [AuthorController::class, 'index'])->name('author');
+Route::post('/users/register', [UserController::class, 'register']);
+Route::post('/users/forgot-password', [UserController::class, 'forgotPassword']);
+Route::get('/users/reset-password/{token}', [UserController::class, 'resetPassword'])->name('users.resetPassword');
+Route::post('/users/reset-password', [UserController::class, 'resetPasswordSubmit']);
 Route::post('/users/{userId}/avatar', [UserController::class, 'updateAvatar']);
 
 Route::group(['middleware' => ['AuthCheck']], function () {

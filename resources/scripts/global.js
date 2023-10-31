@@ -66,3 +66,75 @@ window.updateUserAvatar = (input) => {
     })
     .catch((error) => console.log(error.response));
 };
+
+window.handleNewUserClick = () => {
+  document.querySelector('.modal--login').classList.add('modal--hidden');
+  document.querySelector('.modal--register').classList.remove('modal--hidden');
+};
+
+window.handleRegisterBack = () => {
+  document.querySelector('.modal--login').classList.remove('modal--hidden');
+  document.querySelector('.modal--register').classList.add('modal--hidden');
+};
+
+window.handleRegisterButtonSubmit = (evt) => {
+  evt.preventDefault();
+  evt.target.setAttribute('disabled', 'disabled');
+  const form = evt.target.closest('form');
+
+  axios.post('/users/register', new FormData(form))
+    .then(() => {
+      window.location.reload();
+    })
+    .catch((error) => {
+      if (error.response.data.name) {
+        form.querySelector('[name="name"]').closest('.field')
+          .setAttribute('data-error', error.response.data.name);
+      }
+      if (error.response.data.email) {
+        form.querySelector('[name="email"]').closest('.field')
+          .setAttribute('data-error', error.response.data.email);
+      }
+      if (error.response.data.password) {
+        form.querySelector('[name="password"]').closest('.field')
+          .setAttribute('data-error', error.response.data.password);
+      }
+      if (error.response.data.confirm_password) {
+        form.querySelector('[name="confirm_password"]').closest('.field')
+          .setAttribute('data-error', error.response.data.confirm_password);
+      }
+      evt.target.removeAttribute('disabled');
+    })
+}
+
+window.handleForgotClick = () => {
+  document.querySelector('.modal--login').classList.add('modal--hidden');
+  document.querySelector('.modal--forgot').classList.remove('modal--hidden');
+};
+
+window.handleForgotBack = () => {
+  document.querySelector('.modal--login').classList.remove('modal--hidden');
+  document.querySelector('.modal--forgot').classList.add('modal--hidden');
+};
+
+window.sendResetLink = (evt) => {
+  evt.preventDefault();
+  evt.target.setAttribute('disabled', 'disabled');
+  const form = evt.target.closest('form');
+  const email = form.email.value;
+
+  axios.post('/users/forgot-password', { email })
+    .then(({ data }) => {
+      form.previousElementSibling.classList.add('text--success')
+      form.previousElementSibling.textContent = data.message;
+      form.remove();
+      evt.target.removeAttribute('disabled');
+    })
+    .catch((error) => {
+      if (error.response.data.email) {
+        form.querySelector('[name="email"]').closest('.field')
+          .setAttribute('data-error', error.response.data.email);
+      }
+      evt.target.removeAttribute('disabled');
+    })
+}

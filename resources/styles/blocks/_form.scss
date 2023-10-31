@@ -13,6 +13,10 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 0 16px;
+
+  a {
+    max-width: max-content;
+  }
 }
 
 .form__submit {

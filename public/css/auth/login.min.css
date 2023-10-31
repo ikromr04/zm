@@ -90,6 +90,9 @@ img {
 .text--error {
   color: #DC0000;
 }
+.text--success {
+  color: #66bb6a;
+}
 
 .login {
   width: 90%;

@@ -1,11 +1,12 @@
 {
-    "/js/pages/index.min.js": "/js/pages/index.min.js?id=20d9662a000d8bfd35300ded9fa62177",
-    "/js/pages/author/index.min.js": "/js/pages/author/index.min.js?id=2dfaf6918a69a2b9b8b02f2495fde2c2",
-    "/js/pages/quotes/selected.min.js": "/js/pages/quotes/selected.min.js?id=bf256779abc08a7185da676de5ca48fc",
-    "/js/pages/tags/index.min.js": "/js/pages/tags/index.min.js?id=fb01105ffaababf410c52d5daecb2c81",
-    "/js/pages/tags/selected.min.js": "/js/pages/tags/selected.min.js?id=49088542bce72cabb41b45383a8c6053",
+    "/js/pages/index.min.js": "/js/pages/index.min.js?id=ceb9dffc2bc826f9503177a244d1ef31",
+    "/js/pages/author/index.min.js": "/js/pages/author/index.min.js?id=6bb3f2844cfbf2044d146473a952a043",
+    "/js/pages/quotes/selected.min.js": "/js/pages/quotes/selected.min.js?id=9f6908b3fdc04a20466bb9c274dcbc85",
+    "/js/pages/tags/index.min.js": "/js/pages/tags/index.min.js?id=3d092f486aae81a934c13caee28726f0",
+    "/js/pages/tags/selected.min.js": "/js/pages/tags/selected.min.js?id=3d91165a36a4ba0ce9cd1d8bbe0e157a",
     "/js/auth/login.min.js": "/js/auth/login.min.js?id=86025c237e2b976f9b7cc8ac1ec616ec",
+    "/js/pages/reset-password.min.js": "/js/pages/reset-password.min.js?id=36b65c7161d07aded0d3b9f8fe6e53ff",
     "/js/admin.min.js": "/js/admin.min.js?id=9aff3f3a17428ed3e3173f47dea5d1dd",
-    "/css/auth/login.min.css": "/css/auth/login.min.css?id=cf28e39d2432425709423f2abea5f348",
-    "/css/index.min.css": "/css/index.min.css?id=e743f1eca2cd35fdd2b51ce03ec94b66"
+    "/css/auth/login.min.css": "/css/auth/login.min.css?id=d5a1eddbda3faa7e3148793de48c48f2",
+    "/css/index.min.css": "/css/index.min.css?id=2d6593d824a36268b26753a3bcb702c6"
 }

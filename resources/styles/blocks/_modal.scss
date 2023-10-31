@@ -72,3 +72,15 @@
 .modal__button {
   max-width: none;
 }
+
+.modal__back {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  max-width: max-content;
+  gap: 8px;
+  font-weight: 500;
+  margin-top: 16px;
+}

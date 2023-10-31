@@ -18,6 +18,7 @@ mix
   .js('resources/scripts/pages/tags/index.js', 'public/js/pages/tags/index.min.js')
   .js('resources/scripts/pages/tags/selected.js', 'public/js/pages/tags/selected.min.js')
   .js('resources/scripts/auth/login.js', 'public/js/auth/login.min.js')
+  .js('resources/scripts/pages/reset-password.js', 'public/js/pages/reset-password.min.js')
 
   .sass('resources/styles/index.scss', 'public/css/index.min.css')
   .sass('resources/styles/auth/login.scss', 'public/css/auth/login.min.css')
