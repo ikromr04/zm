@@ -13,6 +13,7 @@ const mix = require('laravel-mix');
 
 mix
   .js('resources/scripts/pages/index.js', 'public/js/pages/index.min.js')
+  .js('resources/scripts/pages/user.js', 'public/js/pages/user.min.js')
   .js('resources/scripts/pages/author/index.js', 'public/js/pages/author/index.min.js')
   .js('resources/scripts/pages/quotes/selected.js', 'public/js/pages/quotes/selected.min.js')
   .js('resources/scripts/pages/tags/index.js', 'public/js/pages/tags/index.min.js')

@@ -74,6 +74,10 @@ img {
     background-color: $base-secondary;
   }
 
+  &--gray {
+    background-color: #B2B2B2;
+  }
+
   @include desktop {
     &:hover {
       background-color: $base-secondary;

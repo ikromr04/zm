@@ -18,7 +18,7 @@ class AuthCheck
   {
     if (!session()->has('user') && $request->path() != 'auth/login' && $request->path() != 'auth/login') {
 
-      return redirect(route('auth.login'))->with('fail', 'Вы должны быть зарегистрированы');
+      return redirect(route('home'))->with('fail', 'Вы должны быть зарегистрированы');
     }
 
     $response = $next($request);

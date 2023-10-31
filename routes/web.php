@@ -35,9 +35,13 @@ Route::post('/users/register', [UserController::class, 'register']);
 Route::post('/users/forgot-password', [UserController::class, 'forgotPassword']);
 Route::get('/users/reset-password/{token}', [UserController::class, 'resetPassword'])->name('users.resetPassword');
 Route::post('/users/reset-password', [UserController::class, 'resetPasswordSubmit']);
-Route::post('/users/{userId}/avatar', [UserController::class, 'updateAvatar']);
 
 Route::group(['middleware' => ['AuthCheck']], function () {
+  Route::post('/users/{userId}/avatar', [UserController::class, 'updateAvatar']);
+  Route::get('/users/{userId}/profile', [UserController::class, 'profile'])->name('users.profile');
+  Route::post('/users/{userId}/update', [UserController::class, 'update'])->name('users.update');
+  Route::post('/users/{userId}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
+
   Route::group(['middleware' => ['AdminCheck']], function () {
     Route::view('/admin/{path?}', 'admin')->where('path', '.*');
 

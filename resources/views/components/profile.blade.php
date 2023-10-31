@@ -17,7 +17,7 @@
     <h2 class="profile__name title">{{ session('user')->name }}</h2>
     <ul class="profile__navigation">
       <li class="profile__navigation-item">
-        <a class="profile__navigation-link" href="">
+        <a class="profile__navigation-link">
           <span>
             <svg width="15" height="18">
               <use xlink:href="{{ asset('images/stack.svg') }}#favorite" />
@@ -27,7 +27,7 @@
         </a>
       </li>
       <li class="profile__navigation-item">
-        <a class="profile__navigation-link" href="">
+        <a class="profile__navigation-link" href="{{ route('users.profile', session('user')->id) }}">
           <span>
             <svg width="21" height="20">
               <use xlink:href="{{ asset('images/stack.svg') }}#profile-settings" />

@@ -74,6 +74,9 @@ img {
 .button--secondary {
   background-color: #e2b65c;
 }
+.button--gray {
+  background-color: #B2B2B2;
+}
 @media (min-width: 1200px) {
   .button:hover {
     background-color: #e2b65c;

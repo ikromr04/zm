@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use stdClass;
 
 class UserController extends Controller
 {
@@ -132,8 +134,7 @@ class UserController extends Controller
       return response(['message' => 'Недействительный токен!'], 400);
     }
 
-    User::where('email', $request->email)
-      ->update(['password' => Hash::make($request->password)]);
+    User::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
 
     DB::table('password_resets')->where(['email' => $request->email])->delete();
 
@@ -142,5 +143,55 @@ class UserController extends Controller
     session()->put('user', $user);
 
     return redirect(route('home'));
+  }
+
+  public function profile($userId)
+  {
+    $data = new stdClass();
+    $data->posts = Post::get();
+    $data->user = User::find($userId);
+
+    return view('pages.users.profile', compact('data'));
+  }
+
+  public function update($userId)
+  {
+    request()->validate([
+      'name' => 'required',
+    ]);
+
+    $user = User::find($userId);
+
+    if (request('email') != $user->email) {
+      request()->validate([
+        'email' => 'required|email|unique:users,email',
+      ]);
+    }
+
+    $user->name = request('name');
+    $user->email = request('email');
+    $user->update();
+
+    return redirect(route('users.profile', $userId));
+  }
+
+  public function updatePassword($userId)
+  {
+    request()->validate([
+      'password' => 'required',
+      'new_password' => 'required|required_with:password_confirm|same:password_confirm',
+      'password_confirm' => 'required'
+    ]);
+
+    $user = User::find($userId);
+
+    if (!Hash::check(request('password'), $user->password)) {
+      return back()->withErrors(['password' => ['Неправильный пароль']]);
+    }
+
+    $user->password = bcrypt(request('new_password'));
+    $user->update();
+
+    return redirect(route('users.profile', $userId))->with('message', 'Пароль успешно обновлен');
   }
 }

@@ -1,0 +1,31 @@
+.user-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include tablet {
+    flex-direction: row-reverse;
+  }
+}
+
+.user-page__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include tablet {
+    flex-grow: 1;
+  }
+}
+
+.user-page__links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+
+  @include tablet {
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+}
