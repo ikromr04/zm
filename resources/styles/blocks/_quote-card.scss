@@ -74,10 +74,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
 
   @include tablet {
     padding: 8px 24px;
+    gap: 24px;
   }
+}
+
+.quote-card__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  color: $base-gray;
 }
 
 .quote-card__button {
@@ -85,16 +94,42 @@
   background-color: transparent;
   padding: 0;
   font-size: 14px;
-  color: $base-secondary;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
-  &::before {
-    content: attr(data-hide-text);
+  svg {
+    fill: none;
   }
 
-  .tags-hidden &::before {
-    content: attr(data-show-text);
+  &--toggle-tags {
+    color: $base-secondary;
+
+    &::before {
+      content: attr(data-hide-text);
+    }
+
+    .tags-hidden &::before {
+      content: attr(data-show-text);
+    }
   }
+
+  &--favorite {
+    color: $base-secondary;
+
+    svg {
+      fill: $base-secondary
+    }
+  }
+}
+
+.quote-card__button-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
 }
 
 .quote-card__share {

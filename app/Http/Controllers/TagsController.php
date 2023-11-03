@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Quote;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use stdClass;
 
 class TagsController extends Controller
@@ -28,6 +29,15 @@ class TagsController extends Controller
     $data->quotes = Quote::whereHas('tags', function ($q) use ($tagId) {
       $q->whereIn('id', $tagId);
     })->paginate(10);
+
+    if (session('user')) {
+      foreach ($data->quotes as $key => $quote) {
+        $data->quotes[$key]->favorite = DB::table('quote_user')
+          ->where('quote_id', $quote->id)
+          ->where('user_id', session('user')->id)
+          ->first();
+      }
+    }
 
     return view('pages.tags.selected', compact('data'));
   }

@@ -28,4 +28,14 @@ class User extends Authenticatable
     'password',
     'remember_token',
   ];
+
+  public function favorites()
+  {
+    return $this->hasMany(Favorite::class);
+  }
+
+  public function quotes()
+  {
+    return $this->belongsToMany(Quote::class, 'quote_user', 'user_id', 'quote_id');
+  }
 }

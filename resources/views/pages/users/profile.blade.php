@@ -4,7 +4,7 @@
   <main class="user-page container">
     <div class="user-page__inner">
       <div class="user-page__links">
-        <a class="button button--gray" href="">Мои избранные</a>
+        <a class="button button--gray" href="{{ route('favorites') }}">Мои избранные</a>
         <a class="button button--secondary">Настройки профиля</a>
       </div>
 

@@ -66,15 +66,55 @@
   </div>
 
   <footer class="quote-card__bottom">
-    @if (count($quote->tags) - 3 > 0)
+    <div class="quote-card__buttons">
+      @if (count($quote->tags) - 3 > 0)
+        <button
+          class="quote-card__button quote-card__button--toggle-tags"
+          type="button"
+          aria-label="Показать/скрыть теги"
+          data-show-text="Ещё теги"
+          data-hide-text="Скрыть теги"
+        ></button>
+      @endif
+
       <button
-        class="quote-card__button"
+        class="quote-card__button{{ $quote->favorite ? ' quote-card__button--favorite' : '' }}"
         type="button"
-        aria-label="Показать/скрыть теги"
-        data-show-text="Ещё теги"
-        data-hide-text="Скрыть теги"
-      ></button>
-    @endif
+        data-quote-id="{{ $quote->id }}"
+        @if (session('user'))
+          @if ($quote->favorite)
+            onclick="window.removeFavorite(event)"
+          @else
+            onclick="window.showFavoriteList(event)"
+          @endif
+        @else
+          onclick="window.showLoginModal()"
+        @endif
+      >
+        <span class="quote-card__button-icon">
+          <svg
+            width="19"
+            height="14"
+          >
+            <use xlink:href="{{ asset('images/stack.svg') }}#to-favorite" />
+          </svg>
+        </span>
+        В избранное
+      </button>
+      <a
+        class="quote-card__button"
+      >
+        <span class="quote-card__button-icon">
+          <svg
+            width="14"
+            height="14"
+          >
+            <use xlink:href="{{ asset('images/stack.svg') }}#twitter" />
+          </svg>
+        </span>
+        Читайте на Х
+      </a>
+    </div>
 
     <div class="quote-card__share">
       <div class="quote-card__share-links">

@@ -25,6 +25,43 @@
 
   <x-search-modal />
 
+  @if (session('user'))
+    <section class="modal modal--favorites modal--hidden">
+      <div class="modal__container">
+        <h2 class="modal__title title title--secondary">Выберите плейлист</h2>
+
+        <ul class="add-favorite">
+          <li>
+            <label>
+              <input
+                type="checkbox"
+                onchange="window.addToFavorite(event)"
+              >
+              Все избранное
+            </label>
+          </li>
+          @foreach (session('user')->favorites as $favorite)
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                  data-favorite-id="{{ $favorite->id }}"
+                  onchange="window.addToFavorite(event)"
+                >
+                {{ $favorite->title }}
+              </label>
+            </li>
+          @endforeach
+        </ul>
+
+        <button class="modal__close" type="button" title="Закрыть окно">
+          <svg width="11" height="10">
+            <use xlink:href="{{ asset('images/stack.svg') }}#close" />
+          </svg>
+        </button>
+      </div>
+    </section>
+  @endif
   @yield('scripts')
 </body>
 

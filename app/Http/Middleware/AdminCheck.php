@@ -17,10 +17,12 @@ class AdminCheck
    */
   public function handle(Request $request, Closure $next)
   {
-    $user = User::find(session()->get('user')->id);
+    if (session() ->get('user')) {
+      $user = User::find(session()->get('user')->id);
 
-    if ($user->role == 'admin') {
-      return $next($request);
+      if ($user->role == 'admin') {
+        return $next($request);
+      }
     }
 
     return redirect(route('auth.login'))->with('fail', 'У Вас нет доступа!');

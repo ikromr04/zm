@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\QuotesController;
@@ -41,29 +42,33 @@ Route::group(['middleware' => ['AuthCheck']], function () {
   Route::get('/users/{userId}/profile', [UserController::class, 'profile'])->name('users.profile');
   Route::post('/users/{userId}/update', [UserController::class, 'update'])->name('users.update');
   Route::post('/users/{userId}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
+  Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites');
+  Route::get('/favorites/{favoriteId?}', [FavoriteController::class, 'show'])->name('favorites.show');
+  Route::post('/favorites', [FavoriteController::class, 'add']);
+  Route::delete('/favorites/quotes/{quoteId}', [FavoriteController::class, 'remove']);
+});
 
-  Route::group(['middleware' => ['AdminCheck']], function () {
-    Route::view('/admin/{path?}', 'admin')->where('path', '.*');
+Route::group(['middleware' => ['AdminCheck']], function () {
+  Route::view('/admin/{path?}', 'admin')->where('path', '.*');
 
-    Route::get('/quote', [QuotesController::class, 'index']);
-    Route::post('/quote', [QuotesController::class, 'store']);
-    Route::get('/quote/{id}', [QuotesController::class, 'show']);
-    Route::post('/quote/{id}', [QuotesController::class, 'update']);
-    Route::delete('/quote/{id}', [QuotesController::class, 'destroy']);
-    Route::post('/quotes/delete', [QuotesController::class, 'multidelete']);
+  Route::get('/quote', [QuotesController::class, 'index']);
+  Route::post('/quote', [QuotesController::class, 'store']);
+  Route::get('/quote/{id}', [QuotesController::class, 'show']);
+  Route::post('/quote/{id}', [QuotesController::class, 'update']);
+  Route::delete('/quote/{id}', [QuotesController::class, 'destroy']);
+  Route::post('/quotes/delete', [QuotesController::class, 'multidelete']);
 
-    Route::get('/tag', [TagsController::class, 'get']);
-    Route::post('/tag', [TagsController::class, 'store']);
-    Route::get('/tag/{id}', [TagsController::class, 'show']);
-    Route::post('/tag/{id}', [TagsController::class, 'update']);
-    Route::delete('/tag/{tag}', [TagsController::class, 'destroy']);
-    Route::post('/hierarchy', [TagsController::class, 'hierarchy']);
+  Route::get('/tag', [TagsController::class, 'get']);
+  Route::post('/tag', [TagsController::class, 'store']);
+  Route::get('/tag/{id}', [TagsController::class, 'show']);
+  Route::post('/tag/{id}', [TagsController::class, 'update']);
+  Route::delete('/tag/{tag}', [TagsController::class, 'destroy']);
+  Route::post('/hierarchy', [TagsController::class, 'hierarchy']);
 
-    Route::get('/post', [PostsController::class, 'index']);
-    Route::post('/post', [PostsController::class, 'store']);
-    Route::get('/post/{id}', [PostsController::class, 'show']);
-    Route::post('/post/{id}', [PostsController::class, 'update']);
-    Route::delete('/post/{id}', [PostsController::class, 'destroy']);
-    Route::post('/posts/delete', [PostsController::class, 'multidelete']);
-  });
+  Route::get('/post', [PostsController::class, 'index']);
+  Route::post('/post', [PostsController::class, 'store']);
+  Route::get('/post/{id}', [PostsController::class, 'show']);
+  Route::post('/post/{id}', [PostsController::class, 'update']);
+  Route::delete('/post/{id}', [PostsController::class, 'destroy']);
+  Route::post('/posts/delete', [PostsController::class, 'multidelete']);
 });

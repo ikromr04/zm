@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorite;
 use App\Models\Post;
+use App\Models\Quote;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -193,5 +195,21 @@ class UserController extends Controller
     $user->update();
 
     return redirect(route('users.profile', $userId))->with('message', 'Пароль успешно обновлен');
+  }
+
+  public function favoritesShow($userId, $favoriteId)
+  {
+    $data = new stdClass();
+    $data->posts = Post::get();
+
+    if ($favoriteId == 'all') {
+      $data->quotes = User::find($userId)->quotes()->paginate(10);
+
+      return view('pages.users.favorites-show', compact('data'));
+    }
+
+    $data->favorites = Favorite::where('user_id', $userId)->get();
+
+    return view('pages.users.favorites', compact('data'));
   }
 }

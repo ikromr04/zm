@@ -25,4 +25,9 @@ class Quote extends Model
   {
     return $this->belongsToMany(Tag::class, 'quote_tag');
   }
+
+  public function favorites()
+  {
+    return $this->belongsToMany(Favorite::class, 'favorite_quote', 'quote_id', 'favorite_id');
+  }
 }

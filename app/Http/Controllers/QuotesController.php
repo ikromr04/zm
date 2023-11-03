@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Quote;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use stdClass;
 
 class QuotesController extends Controller
@@ -14,6 +15,13 @@ class QuotesController extends Controller
     $data = new stdClass();
     $data->quote = Quote::where('slug', $slug)->first();
     $data->tags = Tag::defaultOrder()->get()->toTree();
+
+    if (session('user')) {
+      $data->quote->favorite = DB::table('quote_user')
+        ->where('quote_id', $data->quote->id)
+        ->where('user_id', session('user')->id)
+        ->first();
+    }
 
     return view('pages.quotes.selected', compact('data'));
   }

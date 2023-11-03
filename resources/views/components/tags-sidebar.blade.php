@@ -23,6 +23,7 @@
       </li>
 
       @foreach ($tag->children as $tag)
+      @if ($selectedTag)
         @if ($tag->id !== $selectedTag->id)
           <li class="tags__item">
             <a class="tags__link" href="{{ route('tags.selected', $tag->slug) }}">
@@ -36,6 +37,13 @@
             </a>
           </li>
         @endif
+      @else
+        <li class="tags__item">
+          <a class="tags__link" href="{{ route('tags.selected', $tag->slug) }}">
+            {{ $tag->title }}
+          </a>
+        </li>
+      @endif
       @endforeach
     @endforeach
   </ul>
