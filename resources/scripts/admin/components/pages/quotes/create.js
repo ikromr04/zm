@@ -15,6 +15,7 @@ export default function QuotesCreate() {
     axios
       .post(ApiRoute.Quotes['store'], {
         quote: evt.target.quote.value,
+        twitter: evt.target.twitter.value,
         tags: evt.target.tags.value.split(','),
       })
       .then(() => navigate(AppRoute.Quotes['index']))

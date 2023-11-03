@@ -24,6 +24,7 @@ export default function QuotesEdit() {
     axios
       .post(generatePath(ApiRoute.Quotes['update'], { id: quote.id }), {
         quote: evt.target.quote.value,
+        twitter: evt.target.twitter.value,
         tags: evt.target.tags.value.split(','),
       })
       .then(() => toast.success('Данные успешно сохранены'))

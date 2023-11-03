@@ -17,6 +17,7 @@ class CreateQuotesTable extends Migration
       $table->id();
       $table->text('quote');
       $table->string('slug')->unique()->nullable();
+      $table->string('twitter')->nullable();
       $table->timestamps();
     });
   }

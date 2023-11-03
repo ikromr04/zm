@@ -52,6 +52,16 @@ export default function QuoteForm({ onSubmit, quote }) {
             required
           />
         </Grid>
+        <Grid item xs={6}>
+          <TextField
+            name="twitter"
+            label="Твиттер"
+            type="text"
+            defaultValue={quote?.twitter}
+            fullWidth
+            multiline
+          />
+        </Grid>
 
         <Grid item xs={6}>
           <FormControl fullWidth>

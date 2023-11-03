@@ -53,6 +53,7 @@ class QuotesController extends Controller
 
       $quote = Quote::create([
         'quote' => $request->quote,
+        'twitter' => $request->twitter,
       ]);
 
       $quote->slug = $quote->id;
@@ -82,6 +83,7 @@ class QuotesController extends Controller
     try {
       $quote = Quote::find($id);
       $quote->quote = $request->quote;
+      $quote->twitter = $request->twitter;
       $quote->slug = $request->slug;
       $quote->update();
 
