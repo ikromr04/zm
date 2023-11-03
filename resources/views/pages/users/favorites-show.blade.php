@@ -4,7 +4,7 @@
   <main class="user-page container">
     <div class="user-page__inner">
       <div class="user-page__links">
-        <a class="button button--secondary">Все избранные</a>
+        <a class="button button--secondary">{{ $data->favorite ? $data->favorite->title : 'Все избранные' }}</a>
         <a class="button button--gray" href="{{ route('favorites') }}">Мои избранные</a>
         <a class="button button--gray" href="{{ route('users.profile', session('user')->id) }}">Настройки профиля</a>
       </div>

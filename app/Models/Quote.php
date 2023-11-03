@@ -28,6 +28,6 @@ class Quote extends Model
 
   public function favorites()
   {
-    return $this->belongsToMany(Favorite::class, 'favorite_quote', 'quote_id', 'favorite_id');
+    return $this->belongsToMany(Favorite::class, 'quote_user', 'quote_id', 'favorite_id');
   }
 }

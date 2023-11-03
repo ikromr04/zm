@@ -40,7 +40,8 @@
               Все избранное
             </label>
           </li>
-          @foreach (session('user')->favorites as $favorite)
+
+          @foreach ($favorites as $favorite)
             <li>
               <label>
                 <input
@@ -62,6 +63,10 @@
       </div>
     </section>
   @endif
+
+  <script src="{{ asset('plugins/jquery/jquery-3.6.4.min.js') }}"></script>
+  <script src="{{ asset('plugins/jquery/jquery-ui.min.js') }}"></script>
+  <script src="{{ asset('plugins/jq-nested/jq-nested-sortable.js') }}"></script>
   @yield('scripts')
 </body>
 

@@ -56,4 +56,12 @@
   <symbol id="folder-star" fill="none" viewBox="0 0 20 17">
     <path d="M18 2.5h-8L8.59 1.09A2 2 0 0 0 7.17.5H2a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2v-10a2 2 0 0 0-2-2Zm-3.06 10.41L13 11.78l-1.94 1.13a.5.5 0 0 1-.74-.55l.51-2.2L9.14 8.7c-.33-.29-.16-.84.28-.88l2.23-.19.88-2.06a.5.5 0 0 1 .92 0l.88 2.06 2.23.19a.5.5 0 0 1 .28.88l-1.69 1.46.51 2.2a.49.49 0 0 1-.72.55Z" fill="#E2B65C"/>
   </symbol>
+  <symbol id="more" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="1"/>
+    <circle cx="19" cy="12" r="1"/>
+    <circle cx="5" cy="12" r="1"/>
+  </symbol>
+  <symbol id="folder" fill="none" viewBox="0 0 20 16">
+    <path d="M18 2h-8L8.59.59A2 2 0 0 0 7.17 0H2a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z" fill="currentColor"/>
+  </symbol>
 </svg>

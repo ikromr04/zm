@@ -28,8 +28,8 @@
       </div>
 
       <div class="form__links">
-        <a class="text" onclick="window.handleNewUserClick()">Новый пользователь?</a>
-        <a class="text text--error" onclick="window.handleForgotClick()">Забыли пароль?</a>
+        <a class="text" onclick="window.handleNewUserClick()" style="cursor: pointer">Новый пользователь?</a>
+        <a class="text text--error" onclick="window.handleForgotClick()" style="cursor: pointer">Забыли пароль?</a>
       </div>
 
       <button

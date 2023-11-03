@@ -43,8 +43,11 @@ Route::group(['middleware' => ['AuthCheck']], function () {
   Route::post('/users/{userId}/update', [UserController::class, 'update'])->name('users.update');
   Route::post('/users/{userId}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
   Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites');
-  Route::get('/favorites/{favoriteId?}', [FavoriteController::class, 'show'])->name('favorites.show');
   Route::post('/favorites', [FavoriteController::class, 'add']);
+  Route::post('/favorites/create', [FavoriteController::class, 'create']);
+  Route::post('/favorites/update', [FavoriteController::class, 'update']);
+  Route::delete('/favorites/{favoriteId}', [FavoriteController::class, 'delete']);
+  Route::get('/favorites/{favoriteId?}', [FavoriteController::class, 'show'])->name('favorites.show');
   Route::delete('/favorites/quotes/{quoteId}', [FavoriteController::class, 'remove']);
 });
 
