@@ -1,5 +1,5 @@
 <div class="profile">
-  <button class="account-link" type="button" onclick="window.toggleProfileModal()">
+  <button class="account-link" type="button" onclick="window.showUserModal()">
     {{ session('user')->name }}
   </button>
 

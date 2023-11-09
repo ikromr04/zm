@@ -17,7 +17,7 @@
     @if (session('user'))
       <x-profile />
     @else
-      <button class="login-button" type="button">
+      <button class="login-button" type="button" onclick="window.showLoginModal()">
         <svg width="20" height="20">
           <use xlink:href="{{ asset('images/stack.svg') }}#user" />
         </svg>

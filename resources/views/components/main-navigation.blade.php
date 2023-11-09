@@ -21,11 +21,11 @@
   </a>
 
   @if (session('user'))
-    <button class="main-navigation__link main-navigation__link--account" type="button" onclick="window.toggleProfileModal()">
+    <button class="main-navigation__link main-navigation__link--account" type="button" onclick="window.showUserModal()">
       {{ session('user')->name }}
     </button>
   @else
-    <button class="main-navigation__link main-navigation__link--login" type="button">
+    <button class="main-navigation__link main-navigation__link--login" type="button" onclick="window.showLoginModal()">
       <svg class="main-navigation__link-icon" width="20" height="20">
         <use xlink:href="{{ asset('images/stack.svg') }}#user" />
       </svg>

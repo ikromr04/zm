@@ -44,6 +44,7 @@ img {
 }
 
 .button {
+  position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -68,6 +69,16 @@ img {
 
   &:disabled {
     opacity: 0.6;
+  }
+
+  &[data-loading] {
+    opacity: 0.6;
+    pointer-events: none;
+    color: transparent;
+    background-image: url("/images/spinner.gif");
+    background-position: center;
+    background-size: 24px;
+    background-repeat: no-repeat;
   }
 
   &--secondary {

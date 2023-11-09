@@ -13,27 +13,32 @@ class AuthController extends Controller
     return view('auth.login');
   }
 
-  public function check(Request $request)
+  public function check()
   {
-    if (!$request->login) {
-      return response(['email' => 'Это поле обязательное'], 400);
-    }
-    if (!$request->password) {
-      return response(['password' => 'Это поле обязательное'], 400);
-    }
+    request()->validate([
+      'email' => 'required|email',
+      'password' => 'required',
+    ]);
 
-    $user = User::where('email', '=', $request->login)->first();
+    $user = User::where('email', '=', request('email'))->first();
 
     if (!$user) {
-      return response(['email' => 'Пользователь не найден'], 400);
+      return response([
+        'errors' => [
+          'email' => 'Пользователь не найден',
+        ],
+      ], 400);
     }
 
-    if (Hash::check($request->password, $user->password)) {
+    if (Hash::check(request('password'), $user->password)) {
       session()->put('user', $user);
-
       return $user;
     } else {
-      return response(['password' => 'Неправильный пароль'], 400);
+      return response([
+        'errors' => [
+          'password' => 'Неправильный пароль',
+        ],
+      ], 400);
     }
   }
 
