@@ -1,37 +1,28 @@
-<header class="page-header">
-  <div class="page-header__container container">
+<header class="main-header main-header--collapsed">
+  <div class="main-header__container container">
     <x-main-logo />
+
+    <button class="menu-button" type="button" onclick="this.closest('.main-header').classList.toggle('main-header--collapsed')">
+      <span class="visually-hidden">Переключить меню</span>
+      <svg class="menu-button__icon menu-button__icon--expand" width="18" height="12">
+        <use xlink:href="{{ asset('images/stack.svg') }}#menu" />
+      </svg>
+      <svg class="menu-button__icon menu-button__icon--collapse" width="18" height="15">
+        <use xlink:href="/images/stack.svg#close" />
+      </svg>
+    </button>
 
     <x-main-navigation />
 
     @if (session('user'))
       <x-profile />
     @else
-      <button
-        class="login-link"
-        type="button"
-      >
-        <svg
-          class="main-navigation__link-icon"
-          width="20"
-          height="20"
-        >
+      <button class="login-button" type="button">
+        <svg width="20" height="20">
           <use xlink:href="{{ asset('images/stack.svg') }}#user" />
         </svg>
         Вход
       </button>
     @endif
   </div>
-
-  <template id="menu-toggler">
-    <button class="page-header__button" type="button" aria-label="Переключить меню">
-      <svg width="18" height="12">
-        <use xlink:href="{{ asset('images/stack.svg') }}#menu" />
-      </svg>
-    </button>
-  </template>
 </header>
-
-<x-login-modal />
-<x-register-modal />
-<x-forgot-modal />

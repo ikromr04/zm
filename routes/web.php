@@ -4,7 +4,6 @@ use App\Http\Controllers\AppController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\FavoriteController;
-use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\QuotesController;
 use App\Http\Controllers\TagsController;
@@ -25,30 +24,36 @@ use Illuminate\Support\Facades\Route;
 Route::post('/auth/check', [AuthController::class, 'check'])->name('auth.check');
 Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::get('/auth/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/auth/verify', [AuthController::class, 'verify'])->name('auth.verify');
+Route::get('/auth/verify/{id}/{hash}', [UserController::class, 'verifyEmail'])->name('auth.verifyEmail');
 
-Route::get('/', [AppController::class, 'index'])->name('home');
-Route::get('/thoughts/search', [QuotesController::class, 'search'])->name('quotes.search');
-Route::get('/thoughts/{slug}', [QuotesController::class, 'selected'])->name('quotes.selected');
-Route::get('/tags', [TagsController::class, 'index'])->name('tags');
-Route::get('/tags/{slug}', [TagsController::class, 'selected'])->name('tags.selected');
-Route::get('/author', [AuthorController::class, 'index'])->name('author');
-Route::post('/users/register', [UserController::class, 'register']);
-Route::post('/users/forgot-password', [UserController::class, 'forgotPassword']);
-Route::get('/users/reset-password/{token}', [UserController::class, 'resetPassword'])->name('users.resetPassword');
-Route::post('/users/reset-password', [UserController::class, 'resetPasswordSubmit']);
+Route::group(['middleware' => ['VerifyEmail']], function() {
+  Route::get('/', [AppController::class, 'index'])->name('home');
+  Route::get('/thoughts/search', [QuotesController::class, 'search'])->name('quotes.search');
+  Route::get('/thoughts/{slug}', [QuotesController::class, 'selected'])->name('quotes.selected');
+  Route::get('/tags', [TagsController::class, 'index'])->name('tags');
+  Route::get('/tags/{slug}', [TagsController::class, 'selected'])->name('tags.selected');
+  Route::get('/author', [AuthorController::class, 'index'])->name('author');
+  Route::post('/users/register', [UserController::class, 'register']);
+  Route::post('/users/forgot-password', [UserController::class, 'forgotPassword']);
+  Route::get('/users/reset-password/{token}', [UserController::class, 'resetPassword'])->name('users.resetPassword');
+  Route::post('/users/reset-password', [UserController::class, 'resetPasswordSubmit']);
 
-Route::group(['middleware' => ['AuthCheck']], function () {
-  Route::post('/users/{userId}/avatar', [UserController::class, 'updateAvatar']);
-  Route::get('/users/{userId}/profile', [UserController::class, 'profile'])->name('users.profile');
-  Route::post('/users/{userId}/update', [UserController::class, 'update'])->name('users.update');
-  Route::post('/users/{userId}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
-  Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites');
-  Route::post('/favorites', [FavoriteController::class, 'add']);
-  Route::post('/favorites/create', [FavoriteController::class, 'create']);
-  Route::post('/favorites/update', [FavoriteController::class, 'update']);
-  Route::delete('/favorites/{favoriteId}', [FavoriteController::class, 'delete']);
-  Route::get('/favorites/{favoriteId?}', [FavoriteController::class, 'show'])->name('favorites.show');
-  Route::delete('/favorites/quotes/{quoteId}', [FavoriteController::class, 'remove']);
+  Route::group(['middleware' => ['AuthCheck']], function () {
+    Route::post('/auth/verify', [AuthController::class, 'verification'])->name('auth.verification');
+
+    Route::post('/users/{userId}/avatar', [UserController::class, 'updateAvatar']);
+    Route::get('/users/{userId}/profile', [UserController::class, 'profile'])->name('users.profile');
+    Route::post('/users/{userId}/update', [UserController::class, 'update'])->name('users.update');
+    Route::post('/users/{userId}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites');
+    Route::post('/favorites', [FavoriteController::class, 'add']);
+    Route::post('/favorites/create', [FavoriteController::class, 'create']);
+    Route::post('/favorites/update', [FavoriteController::class, 'update']);
+    Route::delete('/favorites/{favoriteId}', [FavoriteController::class, 'delete']);
+    Route::get('/favorites/{favoriteId?}', [FavoriteController::class, 'show'])->name('favorites.show');
+    Route::delete('/favorites/quotes/{quoteId}', [FavoriteController::class, 'remove']);
+  });
 });
 
 Route::group(['middleware' => ['AdminCheck']], function () {

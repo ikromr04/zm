@@ -1,13 +1,13 @@
 {
-    "/js/pages/index.min.js": "/js/pages/index.min.js?id=d42cc4ac0dfd9c9886916c2b0b306260",
-    "/js/pages/user.min.js": "/js/pages/user.min.js?id=ebaba4d1ccbcdcfccc7f5ffd20fa7a8f",
-    "/js/pages/author/index.min.js": "/js/pages/author/index.min.js?id=b668abde9a42c628d320daafa643b8fe",
-    "/js/pages/quotes/selected.min.js": "/js/pages/quotes/selected.min.js?id=c80c6feee32ce0ae1bfc5616133048c8",
-    "/js/pages/tags/index.min.js": "/js/pages/tags/index.min.js?id=b668abde9a42c628d320daafa643b8fe",
-    "/js/pages/tags/selected.min.js": "/js/pages/tags/selected.min.js?id=c80c6feee32ce0ae1bfc5616133048c8",
-    "/js/auth/login.min.js": "/js/auth/login.min.js?id=25f1398ab2c96b477d2e69b2c433a128",
-    "/js/pages/reset-password.min.js": "/js/pages/reset-password.min.js?id=a86190633d09f1eecdf47a0386e621a5",
-    "/js/admin.min.js": "/js/admin.min.js?id=2d41a2303e3cf92ee203c2fe4536c3f7",
-    "/css/auth/login.min.css": "/css/auth/login.min.css?id=701fa3a9b10a31b966868640134d32c9",
-    "/css/index.min.css": "/css/index.min.css?id=be19051dcb0df018cca3991a5e7a850a"
+    "/js/pages/index.min.js": "/js/pages/index.min.js?id=9bc56161a67cd501c7ba4e1d0f6cef1a",
+    "/js/pages/user.min.js": "/js/pages/user.min.js?id=456b02678ea8de746614684176f92f03",
+    "/js/pages/author/index.min.js": "/js/pages/author/index.min.js?id=92778ca7e689a43ab1be3067d36b377e",
+    "/js/pages/quotes/selected.min.js": "/js/pages/quotes/selected.min.js?id=a949a2d44394318230d3517431c2c7df",
+    "/js/pages/tags/index.min.js": "/js/pages/tags/index.min.js?id=8adad107b725621aece16fcd5fc43454",
+    "/js/pages/tags/selected.min.js": "/js/pages/tags/selected.min.js?id=4fe3b9067a23fe324149e1bbfba20109",
+    "/js/auth/login.min.js": "/js/auth/login.min.js?id=86025c237e2b976f9b7cc8ac1ec616ec",
+    "/js/pages/reset-password.min.js": "/js/pages/reset-password.min.js?id=36b65c7161d07aded0d3b9f8fe6e53ff",
+    "/js/admin.min.js": "/js/admin.min.js?id=2b08551beea688df4e0f83a9b64dacf8",
+    "/css/auth/login.min.css": "/css/auth/login.min.css?id=f30f70ad444100edaf486c9913c46b92",
+    "/css/index.min.css": "/css/index.min.css?id=1f2e78a12318aafd1bed91b100a8ef37"
 }

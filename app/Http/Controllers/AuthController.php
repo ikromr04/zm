@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Favorite;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -44,6 +43,16 @@ class AuthController extends Controller
       session()->pull('user');
     }
 
-    return redirect()->back();
+    return redirect(route('home'));
+  }
+
+  public function verify()
+  {
+    return view('auth.verify');
+  }
+
+  public function verification()
+  {
+    return redirect(route('home'));
   }
 }

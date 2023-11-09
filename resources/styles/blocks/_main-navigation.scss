@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
 
-  .menu-hidden & {
+  .main-header--collapsed & {
     display: none;
     visibility: hidden;
   }
@@ -12,6 +12,11 @@
     width: auto;
     flex-direction: row;
     gap: 0;
+
+    .main-header--collapsed & {
+      display: flex;
+      visibility: visible;
+    }
   }
 
   @include desktop {

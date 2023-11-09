@@ -16,33 +16,32 @@ use stdClass;
 
 class UserController extends Controller
 {
-  public function register()
+  public function register(Request $request)
   {
-    if (!request('name')) {
-      return response(['name' => 'Это поле обязательное'], 400);
-    }
-    if (!request('email')) {
-      return response(['email' => 'Это поле обязательное'], 400);
-    }
-    if (!request('password')) {
-      return response(['password' => 'Это поле обязательное'], 400);
-    }
-    if (!request('confirm_password')) {
-      return response(['confirm_password' => 'Это поле обязательное'], 400);
-    }
-
-    if (request('password') != request('confirm_password')) {
-      return response([
-        'password' => 'Пароли не совпадают',
-        'confirm_password' => 'Пароли не совпадаюте'
-      ], 400);
-    }
+    $request->validate([
+      'name' => 'required',
+      'email' => 'required|email|unique:users,email',
+      'password' => 'required|required_with:confirm_password|same:confirm_password',
+      'confirm_password' => 'required|required_with:password|same:password',
+    ]);
 
     $user = User::create([
       'name' => request('name'),
       'email' => request('email'),
       'password' => bcrypt(request('password')),
     ]);
+
+    $token = Str::random(64);
+
+    DB::table('verify_email')->insert([
+      'token' => $token,
+      'user_id' => $user->id,
+    ]);
+
+    Mail::send('emails.verify-email', ['token' => $token, 'user' => $user], function ($message) use ($request) {
+      $message->to($request->email);
+      $message->subject('Подтверждение электронной почты');
+    });
 
     session()->put('user', $user);
 
@@ -211,5 +210,22 @@ class UserController extends Controller
     $data->favorites = Favorite::where('user_id', $userId)->get();
 
     return view('pages.users.favorites', compact('data'));
+  }
+
+  public function verifyEmail($id, $hash)
+  {
+    $verifyEmail = DB::table('verify_email')->where(['token' => $hash]);
+
+    if ($verifyEmail) {
+      $verifyEmail->delete();
+
+      $user = User::find($id);
+      $user->email_verified_at = now();
+      $user->update();
+
+      session()->put('user', $user);
+    }
+
+    return redirect(route('home'));
   }
 }
