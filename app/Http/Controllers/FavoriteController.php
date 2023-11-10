@@ -16,7 +16,8 @@ class FavoriteController extends Controller
   {
     $data = new stdClass();
     $data->posts = Post::get();
-    $data->favorites = Favorite::where('user_id', session('user')->id)->defaultOrder()->get()->toTree();
+    $data->favorites = Favorite::where('user_id', session('user')->id)
+      ->defaultOrder()->get()->toTree();
     $data->user = User::with('quotes')->find(session('user')->id);
 
     return view('pages.users.favorites', compact('data'));
@@ -40,8 +41,6 @@ class FavoriteController extends Controller
       $data->quotes = Quote::whereHas('favorites', function ($q) use ($ids) {
         $q->whereIn('id', $ids);
       })->paginate(10);
-
-      // $items = DB::table('quote_user')->whereIn('favorite_id', $ids)->paginate(10);
     }
 
     foreach ($data->quotes as $key => $quote) {
@@ -57,12 +56,23 @@ class FavoriteController extends Controller
   public function add()
   {
     $user = User::find(session('user')->id);
+    $quote = Quote::find(request('quote_id'));
 
-    if (request('favoriteId') != 'undefined') {
-      $user->quotes()->syncWithoutDetaching([request('quoteId') => ['favorite_id' => request('favoriteId') ]]);
+    $ids = [];
+
+    if (count(request('ids')) == 0) {
+      $user->quotes()->detach(request('quote_id'));
     } else {
-      $user->quotes()->syncWithoutDetaching(request('quoteId'));
+      foreach (request('ids') as $id) {
+        if ($id) {
+          $ids[$id] = ['user_id' => $user->id];
+        } else {
+          $user->quotes()->syncWithoutDetaching(request('quote_id'));
+        }
+      }
     }
+
+    $quote->favorites()->sync($ids);
 
     return;
   }
@@ -107,5 +117,13 @@ class FavoriteController extends Controller
   {
     Favorite::find($favoriteId)->delete();
     return;
+  }
+
+  public function modal()
+  {
+    $favorites = User::find(session('user')->id)->favorites;
+    $quote = Quote::find(request('quote_id'));
+
+    return view('components.favorites-modal', compact('favorites', 'quote'));
   }
 }

@@ -18,7 +18,7 @@ class CreateQuoteUserTable extends Migration
       $table->foreign('quote_id')->references('id')->on('quotes')->onDelete('cascade');
       $table->bigInteger('user_id')->unsigned()->nullable();
       $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-      $table->bigInteger('favorite_id')->unsigned()->nullable();
+      $table->bigInteger('favorite_id')->unsigned()->nullable()->default(null);
       $table->foreign('favorite_id')->references('id')->on('favorites')->onDelete('cascade');
       $table->unique(['quote_id', 'user_id', 'favorite_id']);
     });

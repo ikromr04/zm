@@ -53,11 +53,13 @@
         <button class="quote-card__button quote-card__button--toggle-tags" type="button" aria-label="Показать/скрыть теги" data-show-text="Ещё теги" data-hide-text="Скрыть теги"></button>
       @endif
 
-    <button class="quote-card__button{{ $quote->favorite ? ' quote-card__button--favorite' : '' }}" type="button" data-quote-id="{{ $quote->id }}" @if (session('user')) @if ($quote->favorite)
-            onclick="window.removeFavorite(event)"
-          @else
-            onclick="window.showFavoriteList(event)" @endif @else onclick="window.showLoginModal()" @endif
-        >
+    <button class="quote-card__button{{ $quote->favorite ? ' quote-card__button--favorite' : '' }}" type="button" data-quote-id="{{ $quote->id }}"
+      @if (session('user'))
+        onclick="window.showFavoriteModal(event)"
+      @else
+        onclick="window.showLoginModal()"
+      @endif
+      >
         <span class="quote-card__button-icon">
           <svg width="19" height="14">
             <use xlink:href="{{ asset('images/stack.svg') }}#to-favorite" />

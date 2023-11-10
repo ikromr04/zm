@@ -46,7 +46,9 @@ Route::group(['middleware' => ['VerifyEmail']], function() {
     Route::get('/users/{userId}/profile', [UserController::class, 'profile'])->name('users.profile');
     Route::post('/users/{userId}/update', [UserController::class, 'update'])->name('users.update');
     Route::post('/users/{userId}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
+
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites');
+    Route::post('/favorites/modal', [FavoriteController::class, 'modal'])->name('favorites.modal');
     Route::post('/favorites', [FavoriteController::class, 'add']);
     Route::post('/favorites/create', [FavoriteController::class, 'create']);
     Route::post('/favorites/update', [FavoriteController::class, 'update']);

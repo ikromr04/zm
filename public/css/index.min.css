@@ -1801,4 +1801,34 @@ img {
   }
 }
 
+.favorite-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.favorite-list__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: -moz-max-content;
+  max-width: max-content;
+}
+
+.favorite-list__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  border: 2px solid #111111;
+  color: transparent;
+}
+input:checked + .favorite-list__icon {
+  color: white;
+  border: 1px solid #111111;
+  background-color: #66bb6a;
+}
+
 /*# sourceMappingURL=index.min.css.map*/

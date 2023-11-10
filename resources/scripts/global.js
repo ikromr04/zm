@@ -1,5 +1,7 @@
+import axios from 'axios';
 import './modules/page-header.js';
 import './modules/search-modal.js';
+import { createElement } from './util.js';
 
 window.closeModal = (evt, modal) => {
   if (evt.target.classList.contains('modal') || evt.target.classList.contains('modal__close')) {
@@ -11,42 +13,34 @@ window.clearError = (input) => {
   input.closest('.field').removeAttribute('data-error');
 };
 
-// window.addToFavorite = (evt) => {
-//   const quoteId = localStorage.getItem('quote_id');
-//   const favoriteId = evt.target.dataset.favoriteId;
+window.showFavoriteModal = (evt) => {
+  const quoteId = evt.target.dataset.quoteId;
 
-//   if (evt.target.checked) {
-//     evt.target.setAttribute('disabled', 'disabled');
+  axios.post('/favorites/modal', { quote_id: quoteId })
+    .then(({ data }) => {
+      document.body.append(createElement(data));
+    })
+    .catch(({ response }) => {
+      console.error(response.data.message);
+    })
+};
 
-//     axios.post('/favorites', {
-//       favoriteId,
-//       quoteId
-//     })
-//       .then(() => {
-//         const button = document.querySelector(`[data-quote-id="${quoteId}"]`);
-//         document.querySelector('.modal--favorites').classList.add('modal--hidden');
-//         button.setAttribute('onclick', 'window.removeFavorite(event)');
-//         button.classList.add('quote-card__button--favorite');
-//         evt.target.removeAttribute('disabled');
-//         evt.target.checked = false;
-//       })
-//       .catch((error) => {
-//         console.error(error.response.data.message);
-//         evt.target.removeAttribute('disabled');
-//       })
-//   }
-// };
+window.addToFavorites = (evt) => {
+  const inputs = evt.target.closest('.modal').querySelectorAll('input:checked');
+  const ids = Array.from(inputs).map((input) => input.value);
 
-// window.removeFavorite = (evt) => {
-//   evt.target.classList.remove('quote-card__button--favorite');
-//   const quoteId = evt.target.dataset.quoteId;
+  evt.target.setAttribute('data-loading', 'loading');
 
-//   axios.delete(`/favorites/quotes/${quoteId}`)
-//     .then(() => {
-//       evt.target.setAttribute('onclick', 'window.showFavoriteList(event)');
-//       evt.target.classList.remove('quote-card__button--favorite');
-//     })
-//     .catch((error) => {
-//       console.error(error.response.data.message);
-//     })
-// };
+  axios.post('/favorites', {
+    quote_id: evt.target.dataset.quoteId,
+    ids,
+  })
+    .then(() => {
+      window.location.reload();
+      evt.target.removeAttribute('data-loading');
+    })
+    .catch(({ response }) => {
+      console.error(response.data.message);
+      evt.target.removeAttribute('data-loading');
+    })
+};
