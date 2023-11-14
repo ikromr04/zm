@@ -2,9 +2,13 @@ import axios from 'axios';
 import './modules/page-header.js';
 import './modules/search-modal.js';
 import { createElement } from './util.js';
+import { getFavoritesModalTemplate } from './templates/favorites-modal-template.js';
 
-window.closeModal = (evt, modal) => {
-  if (evt.target.classList.contains('modal') || evt.target.classList.contains('modal__close')) {
+window.closeModal = (evt, modal, boolean = false) => {
+  if (evt.target.classList.contains('modal') && boolean) {
+    modal.remove();
+  }
+  if (evt.target.classList.contains('modal__close')) {
     modal.remove();
   }
 };
@@ -14,15 +18,23 @@ window.clearError = (input) => {
 };
 
 window.showFavoriteModal = (evt) => {
-  const quoteId = evt.target.dataset.quoteId;
+  const quote = JSON.parse(evt.target.dataset.quote);
+  const quoteFolders = JSON.parse(evt.target.dataset.folders);
+  const favorites = document.querySelector('#folders')?.dataset.value;
+  let folders = JSON.parse(favorites);
+  let all = JSON.parse(evt.target.dataset.all);
+  console.log(evt.target.dataset.all);
 
-  axios.post('/favorites/modal', { quote_id: quoteId })
-    .then(({ data }) => {
-      document.body.append(createElement(data));
+  folders = folders.map((folder) => {
+    folder.checked = quoteFolders.find(({ id }) => folder.id == id);
+    folder.children = folder.children.map((folder) => {
+      folder.checked = quoteFolders.find(({ id }) => folder.id == id);
+      return folder;
     })
-    .catch(({ response }) => {
-      console.error(response.data.message);
-    })
+    return folder;
+  });
+  const modal = createElement(getFavoritesModalTemplate(folders, quote, all));
+  document.body.append(modal);
 };
 
 window.addToFavorites = (evt) => {

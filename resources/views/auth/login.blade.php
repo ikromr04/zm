@@ -27,7 +27,7 @@
       <input
         class="text-field"
         id="login"
-        name="login"
+        name="email"
         type="text"
         placeholder="Логин"
         autocomplete="off">
@@ -39,6 +39,7 @@
         class="text-field"
         id="password"
         type="password"
+        name="password"
         placeholder="Пароль"
         autocomplete="off">
     </div>

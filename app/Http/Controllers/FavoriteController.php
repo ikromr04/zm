@@ -27,7 +27,7 @@ class FavoriteController extends Controller
   {
     $data = new stdClass();
     $data->posts = Post::get();
-    $data->user = User::first();
+    $data->user = User::find(session('user')->id);
 
     if ($favoriteId == 'all') {
       $data->favorite = null;

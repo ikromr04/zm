@@ -9,6 +9,10 @@
   align-items: center;
   gap: 8px;
   max-width: max-content;
+
+  &--child {
+    margin-left: 32px;
+  }
 }
 
 .favorite-list__icon {

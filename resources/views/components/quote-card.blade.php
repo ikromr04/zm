@@ -52,14 +52,19 @@
       @if (count($quote->tags) - 3 > 0)
         <button class="quote-card__button quote-card__button--toggle-tags" type="button" aria-label="Показать/скрыть теги" data-show-text="Ещё теги" data-hide-text="Скрыть теги"></button>
       @endif
-
-    <button class="quote-card__button{{ $quote->favorite ? ' quote-card__button--favorite' : '' }}" type="button" data-quote-id="{{ $quote->id }}"
-      @if (session('user'))
-        onclick="window.showFavoriteModal(event)"
+      @php
+        $all = null;
+        if (session('user')) {
+            $all = DB::table('quote_user')
+                ->where('quote_id', $quote->id)
+                ->where('user_id', session('user')->id)
+                ->where('favorite_id', null)
+                ->first();
+        }
+      @endphp
+      <button class="quote-card__button{{ $quote->favorite ? ' quote-card__button--favorite' : '' }}" type="button" data-quote="{{ json_encode($quote) }}" data-all={{ json_encode($all) }} data-folders="{{ json_encode($quote->favorites) }}" @if (session('user')) onclick="window.showFavoriteModal(event)"
       @else
-        onclick="window.showLoginModal()"
-      @endif
-      >
+        onclick="window.showLoginModal()" @endif>
         <span class="quote-card__button-icon">
           <svg width="19" height="14">
             <use xlink:href="{{ asset('images/stack.svg') }}#to-favorite" />

@@ -4,7 +4,7 @@ const form = document.querySelector('.login');
 const submitButton = form.querySelector('[type="submit"]')
 
 form.addEventListener('input', () => {
-  if (form.login.value && form.password.value) {
+  if (form.email.value && form.password.value) {
     submitButton.disabled = false;
     return;
   }
@@ -16,7 +16,7 @@ form.addEventListener('submit', (evt) => {
 
   axios
     .post(form.action, {
-      login: form.login.value,
+      email: form.email.value,
       password: form.password.value,
     })
     .then(({ data }) => {
@@ -26,7 +26,8 @@ form.addEventListener('submit', (evt) => {
       }
       window.location.href = '/';
     })
-    .catch((error) => {
-      form.querySelector('.login__error').innerHTML = error.response.data.error;
+    .catch(({ response }) => {
+      console.log(response);
+      form.querySelector('.login__error').innerHTML = response.data.error;
     });
 });
