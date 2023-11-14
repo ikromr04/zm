@@ -61,7 +61,7 @@
                   <button class="nested-favorites__dropdown-action" type="button" onclick="window.renameFolder(event)">
                     Переименовать
                   </button>
-                  <button class="nested-favorites__dropdown-action" type="button" onclick="window.deleteFolder(event)" data-id="{{ $favorite->id }}">
+                  <button class="nested-favorites__dropdown-action" type="button" onclick="window.showDeleteModal(event)" data-id="{{ $favorite->id }}">
                     Удалить эту папку
                   </button>
                   <button class="nested-favorites__dropdown-action" type="button" onclick="window.createNewSubFolder(event)" data-id="{{ $favorite->id }}">
@@ -94,7 +94,7 @@
                           <button class="nested-favorites__dropdown-action" type="button" onclick="window.renameFolder(event)">
                             Переименовать
                           </button>
-                          <button class="nested-favorites__dropdown-action" type="button" onclick="window.deleteFolder(event)" data-id="{{ $favorite->id }}">
+                          <button class="nested-favorites__dropdown-action" type="button" onclick="window.showDeleteModal(event)" data-id="{{ $favorite->id }}">
                             Удалить эту папку
                           </button>
                         </div>

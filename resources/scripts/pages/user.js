@@ -1,5 +1,7 @@
 import axios from 'axios';
 import '../global.js';
+import { getDeleteModaltemplate } from '../templates/delete-modal-template.js';
+import { createElement } from '../util.js';
 
 const favorites = document.querySelector('.nested-favorites');
 
@@ -62,8 +64,13 @@ window.renameFolder = (evt) => {
   input.value = val;
 };
 
-window.deleteFolder = (evt) => {
-  axios.delete(`/favorites/${evt.target.dataset.id}`)
+window.showDeleteModal = (evt) => {
+  const modal = createElement(getDeleteModaltemplate(evt.target.dataset.id));
+  document.body.append(modal);
+};
+
+window.deleteFolder = (id) => {
+  axios.delete(`/favorites/${id}`)
     .then(() => {
       document.location.reload(true);
     })
