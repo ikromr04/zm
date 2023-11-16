@@ -20,8 +20,8 @@ class UserController extends Controller
     $request->validate([
       'name' => 'required',
       'email' => 'required|email|unique:users,email',
-      'password' => 'required|required_with:confirm_password|same:confirm_password',
-      'confirm_password' => 'required|required_with:password|same:password',
+      'password' => 'required|string|min:8|required_with:confirm_password|same:confirm_password',
+      'confirm_password' => 'required|string|min:8|required_with:password|same:password',
     ]);
 
     $user = User::create([
