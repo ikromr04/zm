@@ -23,7 +23,8 @@
       <h2 class="modal__title title title--secondary">Спасибо за регистрацию</h2>
       <p class="modal__text text">Прежде чем начать, не могли бы Вы подтвердить свой адрес электронной почты, перейдя по ссылке, которую мы только что отправили Вам по электронной почте? Если Вы не получили электронное письмо, мы с радостью вышлем Вам другое</p>
 
-      <form class="form" >
+      <form class="form" action="{{ route('user.verification.resend') }}" method="post">
+        @csrf
         <button class="form__submit button button--secondary" type="submit">
           Выслать повторно
         </button>

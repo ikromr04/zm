@@ -57,6 +57,7 @@ Route::group(['middleware' => ['VerifyEmail']], function() {
     Route::delete('/favorites/quotes/{quoteId}', [FavoriteController::class, 'remove']);
   });
 });
+Route::post('/users/verify/resend', [UserController::class, 'resendEmailVerification'])->name('user.verification.resend');
 
 Route::group(['middleware' => ['AdminCheck']], function () {
   Route::view('/admin/{path?}', 'admin')->where('path', '.*');

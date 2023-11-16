@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Favorite;
 use App\Models\Post;
-use App\Models\Quote;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -38,14 +37,60 @@ class UserController extends Controller
       'user_id' => $user->id,
     ]);
 
-    Mail::send('emails.verify-email', ['token' => $token, 'user' => $user], function ($message) use ($request) {
+    Mail::send('emails.verify-email', [
+      'token' => $token,
+      'user' => $user,
+      'password' => $request->password,
+    ], function ($message) use ($request) {
       $message->to($request->email);
-      $message->subject('Подтверждение электронной почты');
+      $message->subject('Добро пожаловать на сайт zafarmirzo.com!');
     });
 
     session()->put('user', $user);
 
     return $user;
+  }
+
+  public function verifyEmail($id, $hash)
+  {
+    $verifyEmail = DB::table('verify_email')->where(['token' => $hash]);
+
+    if ($verifyEmail) {
+      $verifyEmail->delete();
+
+      $user = User::find($id);
+      $user->email_verified_at = now();
+      $user->update();
+
+      session()->put('user', $user);
+    }
+
+    return redirect(route('home'));
+  }
+
+  public function resendEmailVerification()
+  {
+    $user = session('user');
+    $verifyEmail = DB::table('verify_email')->where(['user_id' => $user->id]);
+    $token = Str::random(64);
+    if ($verifyEmail) {
+      $verifyEmail->delete();
+    }
+    DB::table('verify_email')->insert([
+      'token' => $token,
+      'user_id' => $user->id,
+    ]);
+
+    Mail::send('emails.verify-email', [
+      'token' => $token,
+      'user' => $user,
+      'password' => '',
+    ], function ($message) use ($user) {
+      $message->to($user->email);
+      $message->subject('Добро пожаловать на сайт zafarmirzo.com!');
+    });
+
+    return back();
   }
 
   public function updateAvatar($userId)
@@ -210,22 +255,5 @@ class UserController extends Controller
     $data->favorites = Favorite::where('user_id', $userId)->get();
 
     return view('pages.users.favorites', compact('data'));
-  }
-
-  public function verifyEmail($id, $hash)
-  {
-    $verifyEmail = DB::table('verify_email')->where(['token' => $hash]);
-
-    if ($verifyEmail) {
-      $verifyEmail->delete();
-
-      $user = User::find($id);
-      $user->email_verified_at = now();
-      $user->update();
-
-      session()->put('user', $user);
-    }
-
-    return redirect(route('home'));
   }
 }

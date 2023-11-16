@@ -12,6 +12,7 @@
   <link rel="apple-touch-icon" href="{{ asset('favicons/180x180.png') }}">
   <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
   <link rel="stylesheet" href="{{ asset('css/index.min.css') }}">
+  
   <title>Авторский сайт Зафара Мирзо</title>
 </head>
 
