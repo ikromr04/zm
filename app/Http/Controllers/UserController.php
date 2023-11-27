@@ -68,6 +68,23 @@ class UserController extends Controller
     return redirect(route('home'));
   }
 
+  public function verifyUsersEmail($id, $hash, $email)
+  {
+    $verifyEmail = DB::table('verify_email')->where(['token' => $hash]);
+
+    if ($verifyEmail) {
+      $verifyEmail->delete();
+
+      $user = User::find($id);
+      $user->email = $email;
+      $user->update();
+
+      session()->put('user', $user);
+    }
+
+    return redirect(route('users.profile', $id));
+  }
+
   public function resendEmailVerification()
   {
     $user = session('user');
@@ -212,6 +229,26 @@ class UserController extends Controller
       request()->validate([
         'email' => 'required|email|unique:users,email',
       ]);
+
+      $token = Str::random(64);
+
+      DB::table('verify_email')->insert([
+        'token' => $token,
+        'user_id' => $user->id,
+      ]);
+      $email = request('email');
+      $user->email = $email;
+      $user->update = 'update';
+      Mail::send('emails.verify-email', [
+        'token' => $token,
+        'user' => $user,
+        'password' => '',
+      ], function ($message) use ($email) {
+        $message->to($email);
+        $message->subject('Добро пожаловать на сайт zafarmirzo.com!');
+      });
+
+      return redirect()->back()->with('verify', request('email'));
     }
 
     $user->name = request('name');

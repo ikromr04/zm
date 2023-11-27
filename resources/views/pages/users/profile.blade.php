@@ -11,7 +11,7 @@
       <section class="profile-section">
         <h2 class="profile-section__title title">Общая информация</h2>
 
-        <form class="profile-section__form form" action="{{ route('users.update', $data->user->id) }}" method="post">
+        <form class="profile-section__form form" action="{{ route('users.update', $data->user->id) }}" method="post" onsubmit="this.querySelector('button').setAttribute('disabled', 'disabled')">
           @csrf
           <div class="field{{ $errors->has('name') ? ' field--error' : '' }}" @if($errors->has('name')) data-error="{{ $errors->first('name') }}" @endif>
             <label class="field__label">
@@ -19,12 +19,21 @@
               <input class="field__input" name="name" type="text" oninput="window.clearError(this)" value="{{ old('name') ? old('name') : $data->user->name }}">
             </label>
           </div>
-          <div class="field{{ $errors->has('email') ? ' field--error' : '' }}" @if($errors->has('email')) data-error="{{ $errors->first('email') }}" @endif>
-            <label class="field__label">
-              <span>Электронная почта</span>
-              <input class="field__input" name="email" type="text" oninput="window.clearError(this)" value="{{ old('email') ? old('email') : $data->user->email }}">
-          </label>
-          </div>
+          @if (session('verify'))
+            <div class="field field--error" data-error="{{ 'Пожалуйста подтвердите почту (' . session('verify') . ')' }}">
+              <label class="field__label">
+                <span>Электронная почта</span>
+                <input class="field__input" name="email" type="text" oninput="window.clearError(this)" value="{{ session('verify') }}">
+              </label>
+            </div>
+          @else
+            <div class="field{{ $errors->has('email') ? ' field--error' : '' }}" @if($errors->has('email')) data-error="{{ $errors->first('email') }}" @endif>
+              <label class="field__label">
+                <span>Электронная почта</span>
+                <input class="field__input" name="email" type="text" oninput="window.clearError(this)" value="{{ old('email') ? old('email') : $data->user->email }}">
+              </label>
+            </div>
+          @endif
 
           <button class="form__submit button button--secondary" type="submit">
             Редактировать информацию

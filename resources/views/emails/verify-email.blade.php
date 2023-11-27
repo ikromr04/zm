@@ -17,9 +17,16 @@
   <p>
     Пожалуйста, нажмите кнопку ниже, чтобы подтвердить свой адрес электронной почты
   </p>
-  <a href="{{ route('auth.verifyEmail', ['id' => $user->id, 'hash' => $token]) }}">
-    Подтвердить
-  </a>
+
+  @if ($user->update)
+    <a href="{{ route('users.verifyEmail', ['id' => $user->id, 'hash' => $token, 'email' => $user->email]) }}">
+      Подтвердить
+    </a>
+  @else
+    <a href="{{ route('auth.verifyEmail', ['id' => $user->id, 'hash' => $token]) }}">
+      Подтвердить
+    </a>
+  @endif
 </section>
 
 <p>
