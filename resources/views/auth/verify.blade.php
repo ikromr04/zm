@@ -28,12 +28,11 @@
         <button class="form__submit button button--secondary" type="submit">
           Выслать повторно
         </button>
-        <div class="form__links">
-          <a class="text" href="{{ route('auth.logout') }}">
-            Выйти из аккаунта
-          </a>
-        </div>
-
+        <a class="modal__close" type="button" title="Закрыть окно" href="{{ route('auth.logout') }}">
+          <svg width="11" height="10">
+            <use xlink:href="/images/stack.svg#close" />
+          </svg>
+        </a>
       </form>
     </div>
   </section>

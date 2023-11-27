@@ -1,7 +1,7 @@
 import axios from 'axios';
 import './modules/page-header.js';
 import './modules/search-modal.js';
-import { createElement } from './util.js';
+import { createElement, debounce } from './util.js';
 import { getFavoritesModalTemplate } from './templates/favorites-modal-template.js';
 
 window.closeModal = (evt, modal, boolean = false) => {

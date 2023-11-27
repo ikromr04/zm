@@ -38,6 +38,8 @@ Route::group(['middleware' => ['VerifyEmail']], function() {
   Route::post('/users/forgot-password', [UserController::class, 'forgotPassword']);
   Route::get('/users/reset-password/{token}', [UserController::class, 'resetPassword'])->name('users.resetPassword');
   Route::post('/users/reset-password', [UserController::class, 'resetPasswordSubmit']);
+  Route::get('/terms-of-use', [AppController::class, 'termsOfUse']);
+  Route::get('/privacy-policy', [AppController::class, 'privacyPolicy']);
 
   Route::group(['middleware' => ['AuthCheck']], function () {
     Route::post('/auth/verify', [AuthController::class, 'verification'])->name('auth.verification');

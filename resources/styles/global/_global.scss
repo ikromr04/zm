@@ -111,3 +111,21 @@ img {
     color: #66bb6a;
   }
 }
+
+.box {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+  
+  p {
+    margin: 0;
+  }
+  ul {
+    margin: 0;
+  }
+
+  @include tablet {
+    padding: 16px 24px;
+  }
+}

@@ -31,7 +31,7 @@ export const getRegisterModalTemplate = () => `
         </div>
 
         <button class="form__submit button button--secondary" type="submit" onclick="window.register(event)">
-          Войти
+          Зарегистрироваться
         </button>
       </form>
 

@@ -23,7 +23,7 @@
             <label class="field__label">
               <span>Электронная почта</span>
               <input class="field__input" name="email" type="text" oninput="window.clearError(this)" value="{{ old('email') ? old('email') : $data->user->email }}">
-            </label>
+          </label>
           </div>
 
           <button class="form__submit button button--secondary" type="submit">

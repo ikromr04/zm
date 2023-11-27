@@ -102,7 +102,7 @@
           </svg>
         </a>
         <button class="quote-card__share-link" type="button" aria-label="Скопировать">
-          <svg width="12" height="12">
+          <svg width="13" height="13">
             <use xlink:href="{{ asset('images/stack.svg') }}#copy" />
           </svg>
         </button>

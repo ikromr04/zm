@@ -29,4 +29,20 @@ class AppController extends Controller
 
     return view('pages.index', compact('data'));
   }
+
+  public function termsOfUse()
+  {
+    $data = new stdClass();
+    $data->posts = Post::latest()->get();
+
+    return view('pages.terms-of-use', compact('data'));
+  }
+
+  public function privacyPolicy()
+  {
+    $data = new stdClass();
+    $data->posts = Post::latest()->get();
+
+    return view('pages.privacy-policy', compact('data'));
+  }
 }

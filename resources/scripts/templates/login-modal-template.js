@@ -22,6 +22,11 @@ export const getLoginModaltemplate = () => `
           <a class="text" onclick="window.showRegisterModal()" style="cursor: pointer">Новый пользователь?</a>
           <a class="text text--error" onclick="window.showForgotPasswordModal()" style="cursor: pointer">Забыли пароль?</a>
         </div>
+        <p class="form__aware">
+          Авторизуясь, вы принимаете условия, изложенные в
+          <a href="/terms-of-use">Пользовательском соглашении</a>
+          и даете согласие на <a href="/privacy-policy">обработку персональных данных</a>.
+        </p>
 
         <button class="form__submit button button--secondary" type="submit" onclick="window.login(event)">
           Войти

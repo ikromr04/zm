@@ -218,6 +218,8 @@ class UserController extends Controller
     $user->email = request('email');
     $user->update();
 
+    session()->put('user', $user);
+
     return redirect(route('users.profile', $userId));
   }
 
