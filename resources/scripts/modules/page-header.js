@@ -41,14 +41,22 @@ window.showUserModal = () => {
 window.updateUserAvatar = (input) => {
   const formData = new FormData();
   const userId = input.dataset.userId;
+  const img = document.querySelector('.profile__modal img');
   formData.append('avatar', input.files[0]);
+  img.setAttribute('src', '/images/spinner.gif');
+  img.style.objectFit = 'contain';
 
   axios
     .post(`/users/${userId}/avatar`, formData)
     .then(({ data }) => {
       document.querySelector('.profile__modal img').setAttribute('src', data);
+      img.style.objectFit = 'cover';
     })
-    .catch((error) => console.log(error.response));
+    .catch((error) => {
+      console.log(error.response);
+      img.setAttribute('src', '/images/default-avatar.png');
+      img.style.objectFit = 'cover';
+    });
 };
 
 window.showRegisterModal = () => {
