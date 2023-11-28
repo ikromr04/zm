@@ -14,9 +14,31 @@
 
 .page-footer__container {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  justify-content: center;
   gap: 16px;
+
+  br {
+    display: none;
+  }
+
+  @include tablet {
+    flex-direction: row;
+    gap: 32px;
+
+    br {
+      display: inline;
+    }
+  }
+}
+
+.page-footer__links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: underline;
 }
 
 .page-footer__copyright {
@@ -28,6 +50,7 @@
   min-width: max-content;
 
   @include tablet {
+    margin-right: auto;
     &::before {
       content: "";
       display: block;
