@@ -19,8 +19,8 @@
       <li class="profile__navigation-item">
         <a class="profile__navigation-link" href="{{ route('favorites') }}">
           <span>
-            <svg width="15" height="18">
-              <use xlink:href="{{ asset('images/stack.svg') }}#favorite" />
+            <svg width="19" height="14" fill="none">
+              <use xlink:href="{{ asset('images/stack.svg') }}#to-favorite" />
             </svg>
           </span>
           Мои избранные

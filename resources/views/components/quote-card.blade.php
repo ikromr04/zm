@@ -44,14 +44,14 @@
           </a>
         @endif
       @endforeach
+      @if (count($quote->tags) - 3 > 0)
+        <button class="quote-card__button quote-card__button--toggle-tags" type="button" aria-label="Показать/скрыть теги" data-show-text="Ещё теги" data-hide-text="Скрыть теги"></button>
+      @endif
     </div>
   </div>
 
   <footer class="quote-card__bottom">
     <div class="quote-card__buttons">
-      @if (count($quote->tags) - 3 > 0)
-        <button class="quote-card__button quote-card__button--toggle-tags" type="button" aria-label="Показать/скрыть теги" data-show-text="Ещё теги" data-hide-text="Скрыть теги"></button>
-      @endif
       @php
         $all = null;
         if (session('user')) {

@@ -51,6 +51,7 @@
   align-items: center;
   gap: 8px;
   transition: 0.3s;
+  display: inline-block;
 
   .tags-hidden &:nth-child(n+4) {
     visibility: hidden;
@@ -69,6 +70,7 @@
 }
 
 .quote-card__bottom {
+  position: relative;
   border-top: 1px solid $base-gray;
   padding: 8px 16px;
   display: flex;
@@ -90,6 +92,7 @@
 }
 
 .quote-card__button {
+  margin-left: auto;
   text-decoration: none;
   border: none;
   background-color: transparent;
@@ -131,6 +134,7 @@
   align-items: center;
   width: 24px;
   height: 24px;
+  pointer-events: none;
 }
 
 .quote-card__share {
