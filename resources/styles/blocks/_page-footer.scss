@@ -39,6 +39,10 @@
   flex-direction: column;
   justify-content: center;
   text-decoration: underline;
+
+  a {
+    cursor: pointer;
+  }
 }
 
 .page-footer__copyright {
