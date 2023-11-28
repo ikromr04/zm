@@ -113,19 +113,12 @@ img {
 }
 
 .box {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 16px;
-  margin-top: 16px;
-  
+  margin-top: 8px;
+
   p {
     margin: 0;
   }
   ul {
     margin: 0;
-  }
-
-  @include tablet {
-    padding: 16px 24px;
   }
 }

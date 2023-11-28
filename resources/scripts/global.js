@@ -3,6 +3,8 @@ import './modules/page-header.js';
 import './modules/search-modal.js';
 import { createElement, debounce } from './util.js';
 import { getFavoritesModalTemplate } from './templates/favorites-modal-template.js';
+import { getTermsOfUseModaltemplate } from './templates/terms-of-use-modal-template.js';
+import { getPrivacyPolicyModaltemplate } from './templates/privacy-policy-modal-template.js';
 
 window.closeModal = (evt, modal, boolean = false) => {
   if (evt.target.classList.contains('modal') && boolean) {
@@ -15,6 +17,18 @@ window.closeModal = (evt, modal, boolean = false) => {
 
 window.clearError = (input) => {
   input.closest('.field').removeAttribute('data-error');
+};
+
+window.showTermsOfUseModal = () => {
+  document.querySelector('.modal--login')?.remove();
+  const modal = createElement(getTermsOfUseModaltemplate());
+  document.body.append(modal);
+};
+
+window.showPrivacyPolicyModal = () => {
+  document.querySelector('.modal--login')?.remove();
+  const modal = createElement(getPrivacyPolicyModaltemplate());
+  document.body.append(modal);
 };
 
 window.showFavoriteModal = (evt) => {

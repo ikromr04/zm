@@ -24,8 +24,9 @@ export const getLoginModaltemplate = () => `
         </div>
         <p class="form__aware">
           Авторизуясь, вы принимаете условия, изложенные в
-          <a href="/terms-of-use">Пользовательском соглашении</a>
-          и даете согласие на <a href="/privacy-policy">обработку персональных данных</a>.
+          <span style="text-decoration: underline; cursor: pointer;" onclick="window.showTermsOfUseModal()">Пользовательском соглашении</span>
+          и даете согласие на
+          <span style="text-decoration: underline; cursor: pointer;" onclick="window.showPrivacyPolicyModal()">обработку персональных данных</span>.
         </p>
 
         <button class="form__submit button button--secondary" type="submit" onclick="window.login(event)">

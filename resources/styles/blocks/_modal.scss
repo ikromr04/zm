@@ -45,8 +45,30 @@
   border-radius: 8px;
   margin: auto;
 
+  &--wide {
+    height: 80vh;
+    max-width: 880px;
+  }
+
   @include tablet {
     padding: 80px;
+  }
+}
+
+.modal__scroll {
+  overflow-y: scroll;
+  padding-right: 16px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $base-secondary;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $base-primary;
   }
 }
 
