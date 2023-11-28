@@ -66,8 +66,8 @@
       @else
         onclick="window.showLoginModal()" @endif>
         <span class="quote-card__button-icon">
-          <svg width="19" height="14">
-            <use xlink:href="{{ asset('images/stack.svg') }}#to-favorite" />
+          <svg width="16" height="16">
+            <use xlink:href="{{ asset('images/stack.svg') }}#{{ $quote->favorite ? 'bookmark' : 'favorite' }}" />
           </svg>
         </span>
         В избранное
