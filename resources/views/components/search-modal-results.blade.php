@@ -1,6 +1,6 @@
 <ul>
   @if (count($data->quotes) == 0)
-    <li>Ничего не найдено</li>
+    <li>@lang('Ничего не найдено')</li>
   @endif
   @foreach ($data->quotes as $quote)
     <li>

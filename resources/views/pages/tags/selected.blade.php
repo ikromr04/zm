@@ -2,12 +2,12 @@
 
 @section('content')
   <main class="tag-selected container">
-    <h1 class="visually-hidden">Философское творчество</h1>
+    <h1 class="visually-hidden">@lang('Философское творчество')</h1>
 
     <x-tags-sidebar :tags="$data->tags" :selectedTag="$data->selectedTag" />
 
     <section class="quotes">
-      <h2 class="visually-hidden">Мысли автора</h2>
+      <h2 class="visually-hidden">@lang('Мысли автора')</h2>
 
       <ul class="quotes__list">
         @foreach ($data->quotes as $quote)

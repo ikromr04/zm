@@ -23,7 +23,7 @@
               <use xlink:href="{{ asset('images/stack.svg') }}#favorite" />
             </svg>
           </span>
-          Мои избранные
+          @lang('Мои избранные')
         </a>
       </li>
       <li class="profile__navigation-item">
@@ -33,14 +33,14 @@
               <use xlink:href="{{ asset('images/stack.svg') }}#profile-settings" />
             </svg>
           </span>
-          Настройки профиля
+          @lang('Настройки профиля')
         </a>
       </li>
     </ul>
 
-    <a class="profile__logout button button--secondary" href="{{ route('auth.logout') }}">Выйти</a>
+    <a class="profile__logout button button--secondary" href="{{ route('auth.logout') }}">@lang('Выйти')</a>
 
-    <button class="profile__close" type="button" title="Закрыть окно" onclick="window.closeProfileModal()">
+    <button class="profile__close" type="button" title="@lang('Закрыть окно')" onclick="window.closeProfileModal()">
       <svg width="11" height="10">
         <use xlink:href="{{ asset('images/stack.svg') }}#close" />
       </svg>

@@ -45,7 +45,7 @@
         @endif
       @endforeach
       @if (count($quote->tags) - 3 > 0)
-        <button class="quote-card__button quote-card__button--toggle-tags" type="button" aria-label="Показать/скрыть теги" data-show-text="Ещё теги" data-hide-text="Скрыть теги"></button>
+        <button class="quote-card__button quote-card__button--toggle-tags" type="button" aria-label="@lang('Показать/скрыть теги')" data-show-text="@lang('Ещё теги')" data-hide-text="@lang('Скрыть теги')"></button>
       @endif
     </div>
   </div>
@@ -70,7 +70,7 @@
             <use xlink:href="{{ asset('images/stack.svg') }}#{{ $quote->favorite ? 'bookmark' : 'favorite' }}" />
           </svg>
         </span>
-        В избранное
+        @lang('В избранное')
       </button>
       @if ($quote->twitter)
         <a class="quote-card__button" href="{{ $quote->twitter }}" target="_blank">
@@ -79,36 +79,36 @@
               <use xlink:href="{{ asset('images/stack.svg') }}#twitter" />
             </svg>
           </span>
-          Читайте на Х
+          @lang('Читайте на Х')
         </a>
       @endif
     </div>
 
     <div class="quote-card__share">
       <div class="quote-card__share-links">
-        <a class="quote-card__share-link" title="Фейсбук" href="https://www.facebook.com/sharer/sharer.php?u={{ route('quotes.selected', $quote->slug) }}" target="_blank">
+        <a class="quote-card__share-link" title="@lang('Фейсбук')" href="https://www.facebook.com/sharer/sharer.php?u={{ route('quotes.selected', $quote->slug) }}" target="_blank">
           <svg width="16" height="16">
             <use xlink:href="{{ asset('images/stack.svg') }}#facebook" />
           </svg>
         </a>
-        <a class="quote-card__share-link" title="Твиттер" href="https://twitter.com/intent/tweet?url={{ route('quotes.selected', $quote->slug) }}" target="_blank">
+        <a class="quote-card__share-link" title="@lang('Твиттер')" href="https://twitter.com/intent/tweet?url={{ route('quotes.selected', $quote->slug) }}" target="_blank">
           <svg width="12" height="10">
             <use xlink:href="{{ asset('images/stack.svg') }}#twitter" />
           </svg>
         </a>
-        <a class="quote-card__share-link" title="Телеграм" href="https://telegram.me/share/url?url={{ route('quotes.selected', $quote->slug) }}" target="_blank">
+        <a class="quote-card__share-link" title="@lang('Телеграм')" href="https://telegram.me/share/url?url={{ route('quotes.selected', $quote->slug) }}" target="_blank">
           <svg width="16" height="16">
             <use xlink:href="{{ asset('images/stack.svg') }}#telegram" />
           </svg>
         </a>
-        <button class="quote-card__share-link" type="button" aria-label="Скопировать">
+        <button class="quote-card__share-link" type="button" aria-label="@lang('Скопировать')">
           <svg width="13" height="13">
             <use xlink:href="{{ asset('images/stack.svg') }}#copy" />
           </svg>
         </button>
       </div>
 
-      <button class="quote-card__share-button" type="button" aria-label="Поделиться">
+      <button class="quote-card__share-button" type="button" aria-label="@lang('Поделиться')">
         <svg width="16" height="18">
           <use xlink:href="{{ asset('images/stack.svg') }}#share" />
         </svg>

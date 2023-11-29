@@ -5,7 +5,7 @@
 @endphp
 
 <dialog class="{{ $className }}">
-  <h2 class="search-modal__title title">Поиск по сайту</h2>
+  <h2 class="search-modal__title title">@lang('Поиск по сайту')</h2>
 
   <form
     class="search-modal__form"
@@ -17,13 +17,13 @@
       class="visually-hidden"
       for="search-keyword"
     >
-      Поиск по сайту
+      @lang('Поиск по сайту')
     </label>
     <input
       class="search-modal__input"
       id="search-keyword"
       type="search"
-      placeholder="Введите ключевое слово"
+      placeholder="@lang('Введите ключевое слово')"
       autocomplete="off"
     >
     <div class="search-modal__results"></div>
@@ -33,7 +33,7 @@
   <button
     class="search-modal__close"
     type="button"
-    aria-label="Закрыть окно"
+    aria-label="@lang('Закрыть окно')"
   >
     <svg
       width="18"

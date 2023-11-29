@@ -13,45 +13,47 @@
   <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
   <link rel="stylesheet" href="{{ asset('css/index.min.css') }}">
 
-  <title>Авторский сайт Зафара Мирзо</title>
+  <title>@lang('Авторский сайт Зафара Мирзо')</title>
 </head>
 
 <body class="page__body">
   <main>
     <section class="modal" style="background-color: #fafafa;">
       <div class="modal__container" style="background-color: white;">
-        <h2 class="modal__title title title--secondary">Сброс пароля</h2>
-        <p class="modal__text text">Обновите пароль, чтобы получить доступ к своей учетной записи</p>
+        <h2 class="modal__title title title--secondary">@lang('Сброс пароля')</h2>
+        <p class="modal__text text">
+          @lang('Обновите пароль, чтобы получить доступ к своей учетной записи')
+        </p>
 
         <form class="form">
           @csrf
           <input type="hidden" name="token" value="{{ $token }}">
           <div class="field">
             <label class="field__label">
-              <span class="visually-hidden">Электронная почта</span>
+              <span class="visually-hidden">@lang('Электронная почта')</span>
               <input
                 class="field__input"
                 name="email"
                 type="email"
-                placeholder="Эл. почта"
+                placeholder="@lang('Эл. почта')"
                 oninput="window.clearError(this)">
             </label>
           </div>
           <div class="field">
             <label class="field__label">
-              <span class="visually-hidden">Пароль</span>
-              <input class="field__input" name="password" type="password" placeholder="Пароль" oninput="window.clearError(this)">
+              <span class="visually-hidden">@lang('Пароль')</span>
+              <input class="field__input" name="password" type="password" placeholder="@lang('Пароль')" oninput="window.clearError(this)">
             </label>
           </div>
           <div class="field">
             <label class="field__label">
-              <span class="visually-hidden">Пароль</span>
-              <input class="field__input" name="confirm_password" type="password" placeholder="Подтвердите пароль" oninput="window.clearError(this)">
+              <span class="visually-hidden">@lang('Пароль')</span>
+              <input class="field__input" name="confirm_password" type="password" placeholder="@lang('Подтвердите пароль')" oninput="window.clearError(this)">
             </label>
           </div>
 
           <button class="form__submit button button--secondary" type="submit">
-            Сбросить
+            @lang('Сбросить')
           </button>
         </form>
       </div>

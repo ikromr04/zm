@@ -4,16 +4,16 @@
   <main class="user-page container">
     <div class="user-page__inner">
       <div class="user-page__links">
-        <a class="button button--secondary">{{ $data->favorite ? $data->favorite->title : 'Все избранные' }}</a>
-        <a class="button button--gray" href="{{ route('favorites') }}">Мои избранные</a>
-        <a class="button button--gray" href="{{ route('users.profile', session('user')->id) }}">Настройки профиля</a>
+        <a class="button button--secondary">{{ $data->favorite ? $data->favorite->title : @lang('Все избранные') }}</a>
+        <a class="button button--gray" href="{{ route('favorites') }}">@lang('Мои избранные')</a>
+        <a class="button button--gray" href="{{ route('users.profile', session('user')->id) }}">@lang('Настройки профиля')</a>
       </div>
 
       @if (count($data->quotes) == 0)
-        <p>Список пуст</p>
+        <p>@lang('Список пуст')</p>
       @else
         <section class="quotes">
-          <h2 class="visually-hidden">Мысли автора</h2>
+          <h2 class="visually-hidden">@lang('Мысли автора')</h2>
 
           <ul class="quotes__list">
             @foreach ($data->quotes as $quote)
@@ -30,7 +30,7 @@
     </div>
 
     <aside class="posts">
-      <h2 class="visually-hidden">Картинки</h2>
+      <h2 class="visually-hidden">@lang('Картинки')</h2>
 
       <ul class="posts__list">
         @foreach ($data->posts as $post)

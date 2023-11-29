@@ -13,19 +13,19 @@
     </div>
 
     <h1 class="author-page__title">
-      Авторский сайт <br>
-      Зафар Мирзо
+      @lang('Авторский сайт') <br>
+      @lang('Зафар Мирзо')
     </h1>
 
     <div class="author-page__info">
       <p class="author-page__info-item">
-        Предприниматель и писатель | Философия, Космология, Жизненные ценности, Современный человек и Личностный рост.
+        @lang('Предприниматель и писатель | Философия, Космология, Жизненные ценности, Современный человек и Личностный рост.')
       </p>
       <p class="author-page__info-item">
-        1 Мая 1972
+        @lang('1 Мая 1972')
       </p>
       <p class="author-page__info-item">
-        Социальные сети:
+        @lang('Социальные сети')
         <a
           style="
             display: inline-flex;
@@ -36,7 +36,7 @@
             color: #111;
           "
           href="https://twitter.com/zafarmirzo"
-          title="Твиттер"
+          title="@lang('Твиттер')"
           target="_blank"
         >
           <svg width="20" height="16">

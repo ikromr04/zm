@@ -2,7 +2,7 @@
 
 @section('content')
   <main class="quote-selected container">
-    <h1 class="visually-hidden">Из философского творчества</h1>
+    <h1 class="visually-hidden">@lang('Из философского творчества')</h1>
 
     <x-quote-card :quote="$data->quote" />
 

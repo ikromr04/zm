@@ -12,7 +12,7 @@
     src="{{ asset('images/logo.svg') }}"
     width="192"
     height="40"
-    alt="На главную"
+    alt="На главную страницу"
     loading="lazy"
   >
 </a>

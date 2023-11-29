@@ -3,7 +3,7 @@
 @section('content')
   <main class="tags-page container">
     <div class="tags-page__right">
-      <h1 class="tags-page__title title">Теги</h1>
+      <h1 class="tags-page__title title">@lang('Теги')</h1>
 
       @foreach ($data->tags as $tag)
         <h3 style="margin-bottom: 0">{{ $tag->title }}</h3>
@@ -21,7 +21,7 @@
     </div>
 
     <aside class="posts">
-      <h2 class="visually-hidden">Картинки</h2>
+      <h2 class="visually-hidden">@lang('Картинки')</h2>
 
       <ul class="posts__list">
         @foreach ($data->posts as $post)

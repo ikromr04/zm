@@ -2,10 +2,10 @@
 
 @section('content')
   <main class="home-page container">
-    <h1 class="visually-hidden">Философское творчество</h1>
+    <h1 class="visually-hidden">@lang('Философское творчество')</h1>
 
     <section class="quotes">
-      <h2 class="visually-hidden">Мысли автора</h2>
+      <h2 class="visually-hidden">@lang('Мысли автора')</h2>
 
       <ul class="quotes__list">
         @foreach ($data->quotes as $quote)
@@ -19,7 +19,7 @@
     </section>
 
     <aside class="posts">
-      <h2 class="visually-hidden">Картинки</h2>
+      <h2 class="visually-hidden">@lang('Картинки')</h2>
 
       <ul class="posts__list">
         @foreach ($data->posts as $post)

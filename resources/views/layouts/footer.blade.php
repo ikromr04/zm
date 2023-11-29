@@ -2,18 +2,18 @@
   <div class="page-footer__container container">
     <p class="page-footer__copyright">
       <span>
-        © Зафар Мирзо <br>
+        © @lang('Зафар Мирзо') <br>
         2017 - {{ date('Y') }}
       </span>
     </p>
 
     <div class="page-footer__links">
-      <a onclick="window.showTermsOfUseModal()">Пользовательское соглашение</a>
-      <a onclick="window.showPrivacyPolicyModal()">Политика конфиденциальности</a>
+      <a onclick="window.showTermsOfUseModal()">@lang('Пользовательское соглашение')</a>
+      <a onclick="window.showPrivacyPolicyModal()">@lang('Политика конфиденциальности')</a>
     </div>
 
     <p class="page-footer__feedback">
-      Обратная связь: <br>
+      @lang('Обратная связь') <br>
       <a href="mailto:info@zafarmirzo.com">info@zafarmirzo.com</a>
     </p>
   </div>

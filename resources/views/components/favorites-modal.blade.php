@@ -1,6 +1,6 @@
 <section class="modal" onclick="window.closeModal(event, this)">
   <div class="modal__container">
-    <h2 class="modal__title title title--secondary">Выберите папку</h2>
+    <h2 class="modal__title title title--secondary">@lang('Выберите папку')</h2>
 
     <div class="favorite-list">
       <label class="favorite-list__item">
@@ -17,7 +17,7 @@
             <use xlink:href="/images/stack.svg#check" />
           </svg>
         </span>
-        Все избранное
+        @lang('Все избранное')
       </label>
 
       @foreach ($favorites as $favorite)
@@ -41,10 +41,10 @@
     </div>
 
     <button class="button button--secondary" type="button" data-quote-id="{{ $quote->id }}" style="max-width: none; margin-top: 32px;" onclick="window.addToFavorites(event)">
-      Сохранить
+      @lang('Сохранить')
     </button>
 
-    <button class="modal__close" type="button" title="Закрыть окно">
+    <button class="modal__close" type="button" title="@lang('Закрыть окно')">
       <svg width="11" height="10">
         <use xlink:href="/images/stack.svg#close" />
       </svg>

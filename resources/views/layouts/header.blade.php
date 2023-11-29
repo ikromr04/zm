@@ -3,7 +3,7 @@
     <x-main-logo />
 
     <button class="menu-button" type="button" onclick="this.closest('.main-header').classList.toggle('main-header--collapsed')">
-      <span class="visually-hidden">Переключить меню</span>
+      <span class="visually-hidden">@lang('Переключить меню')</span>
       <svg class="menu-button__icon menu-button__icon--expand" width="18" height="12">
         <use xlink:href="{{ asset('images/stack.svg') }}#menu" />
       </svg>
@@ -21,7 +21,7 @@
         <svg width="20" height="20">
           <use xlink:href="{{ asset('images/stack.svg') }}#user" />
         </svg>
-        Вход
+        @lang('Вход')
       </button>
     @endif
   </div>

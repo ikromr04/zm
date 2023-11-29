@@ -7,7 +7,7 @@
 <aside class="tags">
   <h2 class="tags__title title">
     <button class="tags__button" type="button">
-      Теги
+      @lang('Теги')
       <svg class="tags__button-icon" width="9" height="12">
         <use xlink:href="{{ asset('images/stack.svg') }}#arrow" />
       </svg>

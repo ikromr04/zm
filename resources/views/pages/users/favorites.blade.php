@@ -4,8 +4,8 @@
   <main class="user-page container">
     <div class="user-page__inner">
       <div class="user-page__links">
-        <a class="button button--secondary">Мои избранные</a>
-        <a class="button button--gray" href="{{ route('users.profile', session('user')->id) }}">Настройки профиля</a>
+        <a class="button button--secondary">@lang('Мои избранные')</a>
+        <a class="button button--gray" href="{{ route('users.profile', session('user')->id) }}">@lang('Настройки профиля')</a>
       </div>
 
       <ol class="nested-favorites">
@@ -14,7 +14,7 @@
             <svg width="20" height="17">
               <use xlink:href="{{ asset('images/stack.svg') }}#folder-star" />
             </svg>
-            ({{ count($data->user->quotes) }}) <span>Все избранное</span>
+            ({{ count($data->user->quotes) }}) <span>@lang('Все избранное')</span>
             <div class="nested-favorites__dropdown">
               <button class="nested-favorites__dropdown-button" type="button">
                 <svg width="24" height="24">
@@ -23,10 +23,10 @@
               </button>
               <div class="nested-favorites__dropdown-actions">
                 <a class="nested-favorites__dropdown-action" href="{{ route('favorites.show', 'all') }}">
-                  Посмотреть
+                  @lang('Посмотреть')
                 </a>
                 <button class="nested-favorites__dropdown-action" type="button" onclick="window.createNewFolder(event)">
-                  Создать новую папку
+                  @lang('Создать новую папку')
                 </button>
               </div>
             </div>
@@ -56,16 +56,16 @@
                 </button>
                 <div class="nested-favorites__dropdown-actions">
                   <a class="nested-favorites__dropdown-action" href="{{ route('favorites.show', $favorite->id) }}">
-                    Посмотреть
+                    @lang('Посмотреть')
                   </a>
                   <button class="nested-favorites__dropdown-action" type="button" onclick="window.renameFolder(event)">
-                    Переименовать
+                    @lang('Переименовать')
                   </button>
                   <button class="nested-favorites__dropdown-action" type="button" onclick="window.showDeleteModal(event)" data-id="{{ $favorite->id }}">
-                    Удалить эту папку
+                    @lang('Удалить эту папку')
                   </button>
                   <button class="nested-favorites__dropdown-action" type="button" onclick="window.createNewSubFolder(event)" data-id="{{ $favorite->id }}">
-                    Создать новую подпапку
+                    @lang('Создать новую подпапку')
                   </button>
                 </div>
               </div>
@@ -89,13 +89,13 @@
                         </button>
                         <div class="nested-favorites__dropdown-actions">
                           <a class="nested-favorites__dropdown-action" href="{{ route('favorites.show', $favorite->id) }}">
-                            Посмотреть
+                            @lang('Посмотреть')
                           </a>
                           <button class="nested-favorites__dropdown-action" type="button" onclick="window.renameFolder(event)">
-                            Переименовать
+                            @lang('Переименовать')
                           </button>
                           <button class="nested-favorites__dropdown-action" type="button" onclick="window.showDeleteModal(event)" data-id="{{ $favorite->id }}">
-                            Удалить эту папку
+                            @lang('Удалить эту папку')
                           </button>
                         </div>
                       </div>
@@ -110,7 +110,7 @@
     </div>
 
     <aside class="posts">
-      <h2 class="visually-hidden">Картинки</h2>
+      <h2 class="visually-hidden">@lang('Картинки')</h2>
 
       <ul class="posts__list">
         @foreach ($data->posts as $post)
