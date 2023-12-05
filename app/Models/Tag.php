@@ -28,9 +28,4 @@ class Tag extends Model
   {
     return $this->belongsToMany(Quote::class, 'quote_tag');
   }
-
-  public function group()
-  {
-    return $this->belongsTo(TagsGroup::class, 'group_id');
-  }
 }

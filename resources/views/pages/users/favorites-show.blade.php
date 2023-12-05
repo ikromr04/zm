@@ -3,11 +3,31 @@
 @section('content')
   <main class="user-page container">
     <div class="user-page__inner">
-      <div class="user-page__links">
-        <a class="button button--secondary">{{ $data->favorite ? $data->favorite->title : @lang('Все избранные') }}</a>
-        <a class="button button--gray" href="{{ route('favorites') }}">@lang('Мои избранные')</a>
-        <a class="button button--gray" href="{{ route('users.profile', session('user')->id) }}">@lang('Настройки профиля')</a>
-      </div>
+      <ul class="users-navigation">
+        @if ($data->favorite)
+          <li class="users-navigation__item">
+            <a class="users-navigation__link button button--secondary">
+              {{ $data->favorite->title }}
+            </a>
+          </li>
+        @endif
+        <li class="users-navigation__item">
+          <a
+            class="users-navigation__link button button--{{ $data->favorite ? 'gray' : 'secondary' }}"
+            href="{{ route('favorites') }}"
+          >
+            @lang('Избранные')
+          </a>
+        </li>
+        <li class="users-navigation__item">
+          <a
+            class="users-navigation__link button button--gray"
+            href="{{ route('users.profile', session('user')->id) }}"
+          >
+            @lang('Настройки профиля')
+          </a>
+        </li>
+      </ul>
 
       @if (count($data->quotes) == 0)
         <p>@lang('Список пуст')</p>
@@ -26,7 +46,6 @@
           {{ $data->quotes->links('components.pagination') }}
         </section>
       @endif
-
     </div>
 
     <aside class="posts">

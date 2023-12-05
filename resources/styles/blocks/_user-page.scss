@@ -15,16 +15,5 @@
 
   @include tablet {
     flex-grow: 1;
-    gap: 24px;
-  }
-}
-
-.user-page__links {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-
-  @include tablet {
-    gap: 16px;
   }
 }

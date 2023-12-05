@@ -3,10 +3,21 @@
 @section('content')
   <main class="user-page container">
     <div class="user-page__inner">
-      <div class="user-page__links">
-        <a class="button button--gray" href="{{ route('favorites') }}">@lang('Мои избранные')</a>
-        <a class="button button--secondary">@lang('Настройки профиля')</a>
-      </div>
+      <ul class="users-navigation">
+        <li class="users-navigation__item">
+          <a
+            class="users-navigation__link button button--gray"
+            href="{{ route('favorites') }}"
+          >
+            @lang('Избранные')
+          </a>
+        </li>
+        <li class="users-navigation__item">
+          <a class="users-navigation__link button button--secondary">
+            @lang('Настройки профиля')
+          </a>
+        </li>
+      </ul>
 
       <section class="profile-section">
         <h2 class="profile-section__title title">@lang('Общая информация')</h2>
@@ -20,7 +31,10 @@
             </label>
           </div>
           @if (session('verify'))
-            <div class="field field--error" data-error="{{  @lang('Пожалуйста подтвердите почту') . '(' . session('verify') . ')' }}">
+            <div
+              class="field field--error"
+              data-error="{{  __('Пожалуйста подтвердите почту') . '(' . session('verify') . ')' }}"
+            >
               <label class="field__label">
                 <span>@lang('Электронная почта')</span>
                 <input class="field__input" name="email" type="text" oninput="window.clearError(this)" value="{{ session('verify') }}">

@@ -3,110 +3,142 @@
 @section('content')
   <main class="user-page container">
     <div class="user-page__inner">
-      <div class="user-page__links">
-        <a class="button button--secondary">@lang('Мои избранные')</a>
-        <a class="button button--gray" href="{{ route('users.profile', session('user')->id) }}">@lang('Настройки профиля')</a>
-      </div>
+      <h1 class="visually-hidden">@lang('Избранные')</h1>
 
-      <ol class="nested-favorites">
-        <li class="nested-favorites__item">
-          <div class="nested-favorites__draggable">
-            <svg width="20" height="17">
+      <ul class="users-navigation">
+        <li class="users-navigation__item">
+          <a class="users-navigation__link button button--secondary">
+            @lang('Избранные')
+          </a>
+        </li>
+        <li class="users-navigation__item">
+          <a
+            class="users-navigation__link button button--gray"
+            href="{{ route('users.profile', session('user')->id) }}"
+          >
+            @lang('Настройки профиля')
+          </a>
+        </li>
+        <li class="users-navigation__item users-navigation__item--wide">
+          <button
+            class="users-navigation__link button button--secondary"
+            type="button"
+            onclick="window.createFolder()"
+            data-action="create-folder"
+          >
+            @lang('Создать новую папку')
+          </button>
+        </li>
+      </ul>
+
+      <ul class="favorites">
+        <li class="favorites__item favorites__item--main">
+          <a class="favorites__card" href="{{ route('favorites.show', 'all') }}">
+            <svg width="24" height="24">
               <use xlink:href="{{ asset('images/stack.svg') }}#folder-star" />
             </svg>
-            ({{ count($data->user->quotes) }}) <span>@lang('Все избранное')</span>
-            <div class="nested-favorites__dropdown">
-              <button class="nested-favorites__dropdown-button" type="button">
-                <svg width="24" height="24">
-                  <use xlink:href="{{ asset('images/stack.svg') }}#more" />
-                </svg>
-              </button>
-              <div class="nested-favorites__dropdown-actions">
-                <a class="nested-favorites__dropdown-action" href="{{ route('favorites.show', 'all') }}">
-                  @lang('Посмотреть')
-                </a>
-                <button class="nested-favorites__dropdown-action" type="button" onclick="window.createNewFolder(event)">
-                  @lang('Создать новую папку')
-                </button>
-              </div>
-            </div>
-          </div>
+            ({{ count($data->user->quotes) }}) @lang('Избранные')
+          </a>
         </li>
 
         @foreach ($data->favorites as $favorite)
-          <li class="nested-favorites__item">
-            <div class="nested-favorites__draggable">
-              <svg width="20" height="17" style="color: #e2b65c;">
-                <use xlink:href="{{ asset('images/stack.svg') }}#folder" />
-              </svg>
-              @php
-                $count = count($favorite->quotes);
-
-                foreach ($favorite->children as $children) {
-                    $count = $count + count($children->quotes);
-                }
-              @endphp
-              ({{ count($favorite->quotes) }})
-              <input class="nested-favorites__input" value="{{ $favorite->title }}" readonly onblur="window.updateFavorite(event)" data-id="{{ $favorite->id }}">
-              <div class="nested-favorites__dropdown">
-                <button class="nested-favorites__dropdown-button" type="button">
-                  <svg width="24" height="24">
-                    <use xlink:href="{{ asset('images/stack.svg') }}#more" />
-                  </svg>
-                </button>
-                <div class="nested-favorites__dropdown-actions">
-                  <a class="nested-favorites__dropdown-action" href="{{ route('favorites.show', $favorite->id) }}">
-                    @lang('Посмотреть')
-                  </a>
-                  <button class="nested-favorites__dropdown-action" type="button" onclick="window.renameFolder(event)">
-                    @lang('Переименовать')
+          @php
+            $count = count($favorite->quotes);
+            foreach ($favorite->children as $children) {
+              $count = $count + count($children->quotes);
+            }
+          @endphp
+          <li class="favorites__item">
+            <div class="favorites__card">
+              <a class="favorites__link" href="{{ route('favorites.show', $favorite->id) }}">
+                <svg width="20" height="17">
+                  <use xlink:href="{{ asset('images/stack.svg') }}#folder" />
+                </svg>
+                ({{ count($data->user->quotes) }})
+                <span class="favorites__link-label">{{ $favorite->title }}</span>
+              </a>
+              <input
+                class="favorites__card-edit"
+                type="text"
+                data-id="{{ $favorite->id }}"
+                value="{{ $favorite->title }}"
+                onblur="window.updateFolder(event)">
+              <ul class="favorites__action-list">
+                <li class="favorites__action-item">
+                  <button
+                    class="favorites__action-button favorites__action-button--edit"
+                    type="button"
+                    onclick="window.handleRenameButtonClick(event)"
+                  >
+                    <span class="favorites__action-label">@lang('Переименовать')</span>
+                    <svg width="24" height="24">
+                      <use xlink:href="{{ asset('images/stack.svg') }}#rename" />
+                    </svg>
                   </button>
-                  <button class="nested-favorites__dropdown-action" type="button" onclick="window.showDeleteModal(event)" data-id="{{ $favorite->id }}">
-                    @lang('Удалить эту папку')
+                </li>
+                <li class="favorites__action-item">
+                  <button
+                    class="favorites__action-button"
+                    type="button"
+                    data-id="{{ $favorite->id }}"
+                    onclick="window.showDeleteModal(event)"
+                  >
+                    <span class="favorites__action-label">@lang('Удалить папку')</span>
+                    <svg width="24" height="24">
+                      <use xlink:href="{{ asset('images/stack.svg') }}#delete" />
+                    </svg>
                   </button>
-                  <button class="nested-favorites__dropdown-action" type="button" onclick="window.createNewSubFolder(event)" data-id="{{ $favorite->id }}">
+                </li>
+                <li class="favorites__action-item">
+                  <button
+                    class="button button--secondary"
+                    type="button"
+                  >
                     @lang('Создать новую подпапку')
                   </button>
-                </div>
-              </div>
+                </li>
+              </ul>
             </div>
-
             @if (count($favorite->children) != 0)
-              <ol>
+              <ul class="favorites__children">
                 @foreach ($favorite->children as $favorite)
-                  <li class="nested-favorites__item">
-                    <div class="nested-favorites__draggable">
-                      <svg width="20" height="17" style="color: #B2B2B2;">
+                  <div class="favorites__item-inner">
+                    <a class="favorites__link" href="{{ route('favorites.show', 'all') }}">
+                      <svg width="20" height="17">
                         <use xlink:href="{{ asset('images/stack.svg') }}#folder" />
                       </svg>
-                      ({{ count($favorite->quotes) }})
-                      <input class="nested-favorites__input" value="{{ $favorite->title }}" readonly onblur="window.updateFavorite(event)" data-id="{{ $favorite->id }}">
-                      <div class="nested-favorites__dropdown">
-                        <button class="nested-favorites__dropdown-button" type="button">
-                          <svg width="24" height="24">
-                            <use xlink:href="{{ asset('images/stack.svg') }}#more" />
+                      ({{ count($data->user->quotes) }}) {{ $favorite->title }}
+                    </a>
+                    <ul class="favorites__action-list">
+                      <li class="favorites__action-item">
+                        <button class="favorites__action-button" type="button">
+                          <span class="favorites__action-label">@lang('Переименовать')</span>
+                          <svg width="20" height="17">
+                            <use xlink:href="{{ asset('images/stack.svg') }}#edit" />
                           </svg>
                         </button>
-                        <div class="nested-favorites__dropdown-actions">
-                          <a class="nested-favorites__dropdown-action" href="{{ route('favorites.show', $favorite->id) }}">
-                            @lang('Посмотреть')
-                          </a>
-                          <button class="nested-favorites__dropdown-action" type="button" onclick="window.renameFolder(event)">
-                            @lang('Переименовать')
-                          </button>
-                          <button class="nested-favorites__dropdown-action" type="button" onclick="window.showDeleteModal(event)" data-id="{{ $favorite->id }}">
-                            @lang('Удалить эту папку')
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
+                      </li>
+                      <li class="favorites__action-item">
+                        <button class="favorites__action-button" type="button">
+                          <span class="favorites__action--label">@lang('Удалить папку')</span>
+                          <svg width="20" height="17">
+                            <use xlink:href="{{ asset('images/stack.svg') }}#trash" />
+                          </svg>
+                        </button>
+                      </li>
+                      <li class="favorites__action-item">
+                        <button class="button" type="button">
+                          @lang('Создать новую подпапку')
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
                 @endforeach
-              </ol>
+              </ul>
             @endif
           </li>
         @endforeach
-      </ol>
+      </ul>
     </div>
 
     <aside class="posts">
@@ -121,6 +153,45 @@
       </ul>
     </aside>
   </main>
+  <template id="create-new-folder">
+    <li class="favorites__item favorites__item--new">
+      <form class="favorites__card" onsubmit="window.storeFolder(event)">
+        <svg width="24" height="24">
+          <use xlink:href="{{ asset('images/stack.svg') }}#folder" />
+        </svg>
+        <input
+          class="favorites__new"
+          name="foldername"
+          type="text"
+          placeholder="@lang('Наименование')">
+        <ul class="favorites__action-list">
+          <li class="favorites__action-item">
+            <button
+              class="favorites__action-button favorites__action-button--success"
+              type="submit"
+            >
+              <span class="favorites__action-label">@lang('Создать')</span>
+              <svg width="24" height="24">
+                <use xlink:href="{{ asset('images/stack.svg') }}#plus" />
+              </svg>
+            </button>
+          </li>
+          <li class="favorites__action-item">
+            <button
+              class="favorites__action-button favorites__action-button--error"
+              type="button"
+              onclick="window.cancelCreateFolder()"
+            >
+              <span class="favorites__action-label">@lang('Отмена')</span>
+              <svg width="24" height="24">
+                <use xlink:href="{{ asset('images/stack.svg') }}#cancel" />
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </form>
+    </li>
+  </template>
 @endsection
 
 @section('scripts')

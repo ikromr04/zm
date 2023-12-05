@@ -3,37 +3,61 @@ import '../global.js';
 import { getDeleteModaltemplate } from '../templates/delete-modal-template.js';
 import { createElement } from '../util.js';
 
-const favorites = document.querySelector('.nested-favorites');
+const favoritesMainEl = document.querySelector('.favorites__item--main')
+const createFolderTemplate = document.querySelector('#create-new-folder')
+const createFolderButtonEl = document.querySelector('[data-action="create-folder"]')
 
-if (favorites) {
-  // $('.nested-favorites').nestedSortable({
-  //   handle: 'div',
-  //   items: 'li',
-  //   toleranceElement: '> div',
-  //   excludeRoot: true,
-  //   maxLevels: 2,
-  //   isTree: true,
-  //   expandOnHover: 700,
-  //   startCollapsed: false,
-  //   branchClass: 'nested-favorites__item--branch',
-  //   expandedClass: 'nested-favorites__item--expanded',
-  //   leafClass: 'nested-favorites__item--leaf',
-  //   hoveringClass: 'nested-favorites__item--hover',
-  // });
+window.createFolder = () => {
+  createFolderButtonEl.setAttribute('disabled', 'disabled')
+  const element = createFolderTemplate.content.children[0].cloneNode(true)
+  favoritesMainEl.insertAdjacentElement('afterend', element)
+  element.querySelector('input').focus()
 }
 
-window.createNewFolder = (evt) => {
-  axios.post('/favorites/create', {
-    title: 'Новая папка',
+window.storeFolder = (evt) => {
+  evt.preventDefault()
+  const title = evt.target.foldername.value
+
+  if (!title) {
+    window.cancelCreateFolder()
+  } else {
+    axios.post('/favorites/create', { title })
+      .then(() => {
+        document.location.reload(true);
+      })
+      .catch((error) => console.error(error));
+  }
+}
+
+window.cancelCreateFolder = () => {
+  document.querySelector('.favorites__item--new').remove()
+  createFolderButtonEl.removeAttribute('disabled')
+}
+
+window.handleRenameButtonClick = (evt) => {
+  const cardEl = evt.target.closest('.favorites__card')
+  const input = cardEl.querySelector('input')
+  const value = input.value
+  cardEl.classList.add('favorites__card--edit')
+  input.focus()
+  input.value = ''
+  input.value = value
+}
+
+window.updateFolder = (evt) => {
+  axios.post('/favorites/update', {
+    id: evt.target.dataset.id,
+    title: evt.target.value,
   })
     .then(() => {
-      document.location.reload(true);
+      const cardEl = evt.target.closest('.favorites__card')
+      cardEl.querySelector('.favorites__link-label').textContent = evt.target.value
+      cardEl.classList.remove('favorites__card--edit')
     })
     .catch((error) => console.error(error));
-}
+};
 
 window.createNewSubFolder = (evt) => {
-  console.log(evt.target.dataset.id);
   axios.post('/favorites/create', {
     title: 'Новая папка',
     parent_id: evt.target.dataset.id,
@@ -43,26 +67,6 @@ window.createNewSubFolder = (evt) => {
     })
     .catch((error) => console.error(error));
 }
-
-window.updateFavorite = (evt) => {
-  axios.post('/favorites/update', {
-    id: evt.target.dataset.id,
-    title: evt.target.value,
-  })
-    .then(() => {
-      evt.target.setAttribute('readonly', 'readonly');
-    })
-    .catch((error) => console.error(error));
-};
-
-window.renameFolder = (evt) => {
-  const input = evt.target.closest('.nested-favorites__draggable').querySelector('input');
-  input.removeAttribute('readonly');
-  input.focus();
-  const val = input.value;
-  input.value = '';
-  input.value = val;
-};
 
 window.showDeleteModal = (evt) => {
   const modal = createElement(getDeleteModaltemplate(evt.target.dataset.id));

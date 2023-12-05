@@ -23,7 +23,7 @@
               <use xlink:href="{{ asset('images/stack.svg') }}#favorite" />
             </svg>
           </span>
-          @lang('Мои избранные')
+          @lang('Избранные')
         </a>
       </li>
       <li class="profile__navigation-item">

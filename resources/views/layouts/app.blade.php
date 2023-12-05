@@ -26,10 +26,6 @@
   <x-search-modal />
 
   <input id="folders" type="hidden" data-value="{{ json_encode(session('folders')) }}">
-
-  <script src="{{ asset('plugins/jquery/jquery-3.6.4.min.js') }}"></script>
-  <script src="{{ asset('plugins/jquery/jquery-ui.min.js') }}"></script>
-  <script src="{{ asset('plugins/jq-nested/jq-nested-sortable.js') }}"></script>
   @yield('scripts')
 </body>
 

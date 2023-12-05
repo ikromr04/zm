@@ -100,7 +100,6 @@ class FavoriteController extends Controller
       $favorite->insertBeforeNode($result[0]);
     }
 
-
     return $favorite;
   }
 
