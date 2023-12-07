@@ -16,7 +16,7 @@ class FavoriteController extends Controller
   {
     $data = new stdClass();
     $data->posts = Post::get();
-    $data->favorites = Favorite::where('user_id', session('user')->id)
+    $data->favorites = Favorite::with('quotes')->where('user_id', session('user')->id)
       ->defaultOrder()->get()->toTree();
     $data->user = User::with('quotes')->find(session('user')->id);
 
@@ -115,7 +115,7 @@ class FavoriteController extends Controller
       $favorite->insertBeforeNode($result[0]);
     }
 
-    return $favorite;
+    return Favorite::with('quotes')->find($favorite->id);
   }
 
   public function update()

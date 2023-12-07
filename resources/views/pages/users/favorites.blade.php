@@ -36,6 +36,7 @@
       </ul>
     </aside>
     <input id="user-quotes" type="hidden" data-value="{{ json_encode($data->user->quotes) }}">
+    <input id="user-folders" type="hidden" data-value="{{ json_encode($data->favorites) }}">
   </main>
 @endsection
 

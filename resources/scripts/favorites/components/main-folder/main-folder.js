@@ -6,7 +6,8 @@ function MainFolder() {
   const [count, setCount] = useState(null)
 
   useEffect(() => {
-    const quotes = JSON.parse(document.querySelector('input[id="user-quotes"]').dataset.value)
+    const quotes =
+      JSON.parse(document.querySelector('input[id="user-quotes"]').dataset.value)
     setCount([...new Set(quotes.map(({ id }) => id))].length);
   }, [setCount])
 
