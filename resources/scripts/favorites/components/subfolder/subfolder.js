@@ -1,15 +1,12 @@
 import { useState } from 'react'
 import style from './style.module.css'
 import axios from 'axios'
-import CreateSubfolder from '../create-subfolder/create-subfolder'
-import Subfolder from '../subfolder/subfolder'
 
-function Folder(props) {
+function Subfolder(props) {
   const [folder, setFolder] = useState(props.folder)
   const [isEditable, setIsEditable] = useState(false)
   const [title, setTitle] = useState(folder.title)
   const [isDeleting, setIsDeleting] = useState(false)
-  const [isCreating, setIsCreating] = useState(false)
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault()
@@ -24,7 +21,13 @@ function Folder(props) {
   const handleDeleteClick = () => {
     axios.delete(`/favorites/${folder.id}`)
       .then(() => {
-        props.setFolders((folders) => folders.filter(({ id }) => id != folder.id))
+        props.setFolder((prevState) => {
+          return {
+            ...prevState,
+            children: prevState.children.filter(({ id }) => id != folder.id)
+          }
+        })
+        setIsDeleting(false)
       })
       .catch((error) => console.error(error));
   }
@@ -85,22 +88,7 @@ function Folder(props) {
           </svg>
           <span className={style.info}>Удалить папку</span>
         </button>
-        <button
-          className="button button--secondary"
-          onClick={() => setIsCreating(true)}
-          type="button"
-        >
-          Создать подпапку
-        </button>
       </div>
-      {isCreating &&
-        <CreateSubfolder
-          setIsCreating={setIsCreating}
-          folder={folder}
-          setFolder={setFolder} />}
-      {folder?.children?.map((folder) => (
-        <Subfolder key={folder.id} folder={folder} setFolder={setFolder} />
-      )).reverse()}
       {isDeleting &&
         <section className="modal">
           <div className="modal__container">
@@ -132,4 +120,4 @@ function Folder(props) {
   )
 }
 
-export default Folder
+export default Subfolder

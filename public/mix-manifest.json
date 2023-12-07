@@ -1,6 +1,6 @@
 {
     "/js/pages/index.min.js": "/js/pages/index.min.js?id=bec7cbd6e5d01d898e6d8d30df223f19",
-    "/js/pages/user.min.js": "/js/pages/user.min.js?id=ee610352161066305ca1e2ff73225257",
+    "/js/pages/user.min.js": "/js/pages/user.min.js?id=2fef1643b00c848065c749bc0ee70f3b",
     "/js/pages/author/index.min.js": "/js/pages/author/index.min.js?id=c7eb7975d51ae2ab4fee8c0e7fd32da1",
     "/js/pages/quotes/selected.min.js": "/js/pages/quotes/selected.min.js?id=bcb0d5fcbb3c1011dd939070681626a4",
     "/js/pages/tags/index.min.js": "/js/pages/tags/index.min.js?id=618f1a1641dbc30516bf7d8cd8b47ccb",
@@ -8,7 +8,7 @@
     "/js/auth/login.min.js": "/js/auth/login.min.js?id=9b3a5b3c0fe4034ecc9ea3333725c2ca",
     "/js/pages/reset-password.min.js": "/js/pages/reset-password.min.js?id=36b65c7161d07aded0d3b9f8fe6e53ff",
     "/js/admin.min.js": "/js/admin.min.js?id=2b08551beea688df4e0f83a9b64dacf8",
-    "/js/favorites.min.js": "/js/favorites.min.js?id=11b4eb76288ef6d653114c031c31ca6a",
+    "/js/favorites.min.js": "/js/favorites.min.js?id=680770614b6dab5c98677360579615e7",
     "/css/auth/login.min.css": "/css/auth/login.min.css?id=028be9bbe7e341eae142621573a6b875",
     "/css/index.min.css": "/css/index.min.css?id=bfa52aac5da1369c25f872a760c7c7fd"
 }

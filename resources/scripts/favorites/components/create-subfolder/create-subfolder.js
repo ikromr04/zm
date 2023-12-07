@@ -1,17 +1,21 @@
 import axios from 'axios'
 import style from './style.module.css'
 
-function CreateFolder({ setIsCreating, setFolders }) {
+function CreateSubfolder({ setIsCreating, folder, setFolder }) {
   const handleFormSubmit = (evt) => {
     evt.preventDefault()
-    const title = evt.target.new_folder_name.value
+    const title = evt.target.new_subfolder_name.value
     if (!title) {
       setIsCreating(false)
     } else {
-      axios.post('/favorites/create', { title })
+      axios.post('/favorites/create', {
+        title,
+        parent_id: folder.id,
+      })
         .then(({ data }) => {
-          setFolders((prevState) => {
-            return [data, ...JSON.parse(JSON.stringify(prevState))]
+          setFolder({
+            ...folder,
+            children: [...folder.children, data]
           })
           setIsCreating(false)
         })
@@ -32,7 +36,7 @@ function CreateFolder({ setIsCreating, setFolders }) {
       <input
         className={style.input}
         placeholder="Введите название папки"
-        name="new_folder_name"
+        name="new_subfolder_name"
         autoFocus />
 
       <button
@@ -59,4 +63,4 @@ function CreateFolder({ setIsCreating, setFolders }) {
   )
 }
 
-export default CreateFolder
+export default CreateSubfolder
