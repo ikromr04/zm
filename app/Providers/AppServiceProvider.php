@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
     view()->composer('*', function ($view) {
       $folders = [];
       if (session('user')) {
-        $folders = Favorite::where('user_id', session('user')->id)->get()->toTree();
+        $folders = Favorite::where('user_id', session('user')->id)->defaultOrder()->get()->toTree();
         session()->put('folders', $folders);
       }
 
