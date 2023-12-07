@@ -40,7 +40,8 @@
 
     <a class="profile__logout button button--secondary" href="{{ route('auth.logout') }}">@lang('Выйти')</a>
 
-    <button class="profile__close" type="button" title="@lang('Закрыть окно')" onclick="window.closeProfileModal()">
+    <button class="profile__close" type="button" title="@lang('Закрыть окно')"
+      onclick="this.closest('.profile__modal').classList.add('profile__modal--hidden')">
       <svg width="11" height="10">
         <use xlink:href="{{ asset('images/stack.svg') }}#close" />
       </svg>

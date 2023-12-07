@@ -26,6 +26,7 @@ mix
 
   .js('resources/scripts/admin/index.js', 'public/js/admin.min.js').react()
   .js('resources/scripts/favorites/index.js', 'public/js/favorites.min.js').react()
+  .js('resources/scripts/favorites-modal/index.js', 'public/js/favorites-modal.min.js').react()
 
   .sourceMaps()
   .webpackConfig({

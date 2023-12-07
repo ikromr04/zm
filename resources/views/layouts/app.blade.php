@@ -26,6 +26,7 @@
   <x-search-modal />
 
   <input id="folders" type="hidden" data-value="{{ json_encode(session('folders')) }}">
+  <script src="{{ asset('js/favorites-modal.min.js') }}" type="module"></script>
   @yield('scripts')
 </body>
 

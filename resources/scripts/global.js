@@ -1,8 +1,7 @@
 import axios from 'axios';
 import './modules/page-header.js';
 import './modules/search-modal.js';
-import { createElement, debounce } from './util.js';
-import { getFavoritesModalTemplate } from './templates/favorites-modal-template.js';
+import { createElement } from './util.js';
 import { getTermsOfUseModaltemplate } from './templates/terms-of-use-modal-template.js';
 import { getPrivacyPolicyModaltemplate } from './templates/privacy-policy-modal-template.js';
 
@@ -31,25 +30,25 @@ window.showPrivacyPolicyModal = () => {
   document.body.append(modal);
 };
 
-window.showFavoriteModal = (evt) => {
-  const quote = JSON.parse(evt.target.dataset.quote);
-  const quoteFolders = JSON.parse(evt.target.dataset.folders);
-  const favorites = document.querySelector('#folders')?.dataset.value;
-  let folders = JSON.parse(favorites);
-  let all = JSON.parse(evt.target.dataset.all);
-  console.log(evt.target.dataset.all);
+// window.showFavoriteModal = (evt) => {
+//   const quote = JSON.parse(evt.target.dataset.quote);
+//   const quoteFolders = JSON.parse(evt.target.dataset.folders);
+//   const favorites = document.querySelector('#folders')?.dataset.value;
+//   let folders = JSON.parse(favorites);
+//   let all = JSON.parse(evt.target.dataset.all);
+//   console.log(evt.target.dataset.all);
 
-  folders = folders.map((folder) => {
-    folder.checked = quoteFolders.find(({ id }) => folder.id == id);
-    folder.children = folder.children.map((folder) => {
-      folder.checked = quoteFolders.find(({ id }) => folder.id == id);
-      return folder;
-    })
-    return folder;
-  });
-  const modal = createElement(getFavoritesModalTemplate(folders, quote, all));
-  document.body.append(modal);
-};
+//   folders = folders.map((folder) => {
+//     folder.checked = quoteFolders.find(({ id }) => folder.id == id);
+//     folder.children = folder.children.map((folder) => {
+//       folder.checked = quoteFolders.find(({ id }) => folder.id == id);
+//       return folder;
+//     })
+//     return folder;
+//   });
+//   const modal = createElement(getFavoritesModalTemplate(folders, quote, all));
+//   document.body.append(modal);
+// };
 
 window.addToFavorites = (evt) => {
   const inputs = evt.target.closest('.modal').querySelectorAll('input:checked');
