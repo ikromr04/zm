@@ -42,4 +42,5 @@
 
 @section('scripts')
   <script src="{{ asset('js/favorites.min.js') }}" type="module"></script>
+  <script src="{{ asset('js/pages/user.min.js') }}" type="module"></script>
 @endsection

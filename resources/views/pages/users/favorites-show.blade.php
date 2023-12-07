@@ -36,7 +36,7 @@
           <h2 class="visually-hidden">@lang('Мысли автора')</h2>
 
           <ul class="quotes__list">
-            @foreach (array_unique($data->quotes) as $quote)
+            @foreach ($data->quotes as $quote)
               <li class="quotes__item">
                 <x-quote-card :quote="$quote" />
               </li>

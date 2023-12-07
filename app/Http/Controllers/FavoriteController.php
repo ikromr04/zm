@@ -115,7 +115,7 @@ class FavoriteController extends Controller
       $favorite->insertBeforeNode($result[0]);
     }
 
-    return Favorite::with('quotes')->find($favorite->id);
+    return Favorite::with(['quotes', 'children'])->find($favorite->id);
   }
 
   public function update()
