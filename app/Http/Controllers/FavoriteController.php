@@ -31,7 +31,22 @@ class FavoriteController extends Controller
 
     if ($favoriteId == 'all') {
       $data->favorite = null;
-      $data->quotes = $data->user->quotes()->paginate(10);
+      $data->quotes = $data->user->quotes;
+      function unique_multidimensional_array($array, $key) {
+        $temp_array = array();
+        $i = 0;
+        $key_array = array();
+
+        foreach($array as $val) {
+            if (!in_array($val[$key], $key_array)) {
+                $key_array[$i] = $val[$key];
+                $temp_array[$i] = $val;
+            }
+            $i++;
+        }
+        return $temp_array;
+    }
+      $data->quotes = unique_multidimensional_array($data->quotes, 'id');
     } else {
       $data->favorite = Favorite::find($favoriteId);
       $ids = [$data->favorite->id];

@@ -8,6 +8,7 @@
     "/js/auth/login.min.js": "/js/auth/login.min.js?id=9b3a5b3c0fe4034ecc9ea3333725c2ca",
     "/js/pages/reset-password.min.js": "/js/pages/reset-password.min.js?id=36b65c7161d07aded0d3b9f8fe6e53ff",
     "/js/admin.min.js": "/js/admin.min.js?id=2b08551beea688df4e0f83a9b64dacf8",
+    "/js/favorites.min.js": "/js/favorites.min.js?id=a22de40466475bb17644be4edfa2900f",
     "/css/auth/login.min.css": "/css/auth/login.min.css?id=028be9bbe7e341eae142621573a6b875",
     "/css/index.min.css": "/css/index.min.css?id=bfa52aac5da1369c25f872a760c7c7fd"
 }
