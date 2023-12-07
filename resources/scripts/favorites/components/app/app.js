@@ -34,6 +34,7 @@ function App() {
         <Folder
           key={folder.id}
           folder={folder}
+          setFolders={setFolders}
         />
       ))}
     </div>
