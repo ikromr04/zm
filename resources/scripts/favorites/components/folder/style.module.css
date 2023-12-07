@@ -17,13 +17,14 @@
   align-self: stretch;
   align-items: center;
   gap: 8px;
-  min-width: max-content;
+  flex-wrap: wrap;
   flex-grow: 1;
 }
 
 .input {
   display: flex;
   flex-grow: 1;
+  min-width: 0;
 }
 
 .icon {
