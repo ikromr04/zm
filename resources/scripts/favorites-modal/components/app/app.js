@@ -18,7 +18,6 @@ function App() {
     let quoteFolders = JSON.parse(evt.target.dataset.folders)
     quoteFolders = quoteFolders.map(({ id }) => id)
     !main ? setIsChecked(false) : setIsChecked(true)
-    quoteFolders.length && setIsChecked(true)
     setQuote(quote)
     setIsShown(true)
     setFolders(folders?.map(({ id, title, children }) => ({
@@ -31,7 +30,7 @@ function App() {
 
   const handleSubmitClick = (evt) => {
     const ids = []
-    isChecked && ids.push('')
+    isChecked && ids.push('all')
     folders.forEach((folder) => {
       folder.isChecked && ids.push(folder.id)
       folder?.children?.forEach((child) => child.isChecked && ids.push(child.id))

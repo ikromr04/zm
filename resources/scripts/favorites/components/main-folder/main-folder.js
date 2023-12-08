@@ -16,7 +16,7 @@ function MainFolder() {
       <svg width={24} height={24}>
         <use xlinkHref="/images/stack.svg#folder-star" />
       </svg>
-      {count && `(${count})`} Избранные
+      {count ? `(${count})` : '(0)'} Избранные
     </a>
   )
 }

@@ -19,6 +19,7 @@ class FavoriteController extends Controller
     $data->favorites = Favorite::with('quotes')->where('user_id', session('user')->id)
       ->defaultOrder()->get()->toTree();
     $data->user = User::with('quotes')->find(session('user')->id);
+    $data->userQuotes = $data->user->quotes()->where('favorite_id', null)->get();
 
     return view('pages.users.favorites', compact('data'));
   }
@@ -31,22 +32,7 @@ class FavoriteController extends Controller
 
     if ($favoriteId == 'all') {
       $data->favorite = null;
-      $data->quotes = $data->user->quotes;
-      function unique_multidimensional_array($array, $key) {
-        $temp_array = array();
-        $i = 0;
-        $key_array = array();
-
-        foreach($array as $val) {
-            if (!in_array($val[$key], $key_array)) {
-                $key_array[$i] = $val[$key];
-                $temp_array[$i] = $val;
-            }
-            $i++;
-        }
-        return $temp_array;
-    }
-      $data->quotes = unique_multidimensional_array($data->quotes, 'id');
+      $data->quotes = $data->user->quotes()->where('favorite_id', null)->get();
     } else {
       $data->favorite = Favorite::find($favoriteId);
       $ids = [$data->favorite->id];
@@ -75,15 +61,17 @@ class FavoriteController extends Controller
 
     $ids = [];
 
-    if (count(request('ids')) == 0) {
-      $user->quotes()->detach(request('quote_id'));
-    } else {
-      foreach (request('ids') as $id) {
-        if ($id) {
-          $ids[$id] = ['user_id' => $user->id];
-        } else {
-          $user->quotes()->syncWithoutDetaching(request('quote_id'));
-        }
+    $user->quotes()->detach(request('quote_id'));
+    
+    foreach (request('ids') as $id) {
+      if ($id !== 'all') {
+        $ids[$id] = ['user_id' => $user->id];
+      } else {
+        DB::table('quote_user')->insert([
+          'user_id' => session('user')->id,
+          'quote_id' => request('quote_id')
+        ]);
+        $user->quotes()->syncWithoutDetaching(request('quote_id'));
       }
     }
 
