@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import style from './style.module.css'
 import Folder from '../folder/folder';
 import MainFolder from '../main-folder/main-folder';
 import axios from 'axios';
+import CreateFolder from '../create-folder/create-folder';
 
 function App() {
   const [folders, setFolders] = useState(JSON.parse(document.querySelector('#folders')?.dataset.value))
   const [isShown, setIsShown] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
   const [quote, setQuote] = useState(null)
+  const [isCreating, setIsCreating] = useState(false)
 
   window.showFavoriteModal = (evt) => {
     const main = JSON.parse(evt.target.dataset.all)
@@ -32,7 +34,7 @@ function App() {
     isChecked && ids.push('')
     folders.forEach((folder) => {
       folder.isChecked && ids.push(folder.id)
-      folder?.children.forEach((child) => child.isChecked && ids.push(child.id))
+      folder?.children?.forEach((child) => child.isChecked && ids.push(child.id))
     });
 
     evt.target.setAttribute('data-loading', 'loading');
@@ -59,6 +61,8 @@ function App() {
 
         <MainFolder isChecked={isChecked} setIsChecked={setIsChecked} />
 
+        {isCreating && <CreateFolder setIsCreating={setIsCreating} setFolders={setFolders} />}
+
         <div className={style.folders}>
           {folders?.map((folder) => (
             <Folder
@@ -68,13 +72,17 @@ function App() {
           ))}
         </div>
 
+        <button className={style.newFolder} type="button" onClick={() => setIsCreating(true)}>
+          <svg width={24} height={24}>
+            <use xlinkHref="/images/stack.svg#plus" />
+          </svg>
+          Создать новую папку
+        </button>
+
         <button
           className="button button--secondary"
           type="button"
-          style={{
-            maxWidth: 'none',
-            marginTop: '32px'
-          }}
+          style={{ maxWidth: 'none' }}
           onClick={handleSubmitClick}
         >
           Сохранить

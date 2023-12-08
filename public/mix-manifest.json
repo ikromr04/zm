@@ -1,15 +1,15 @@
 {
-    "/js/pages/index.min.js": "/js/pages/index.min.js?id=89bd4b4aa38f4b0b7637d1c5156faa70",
-    "/js/pages/user.min.js": "/js/pages/user.min.js?id=78fcc7b33e5a554a3aea0c2c6c34ff5b",
-    "/js/pages/author/index.min.js": "/js/pages/author/index.min.js?id=914da12ca57f4670604d319f7881d781",
-    "/js/pages/quotes/selected.min.js": "/js/pages/quotes/selected.min.js?id=f219819601103f39d4324c5a788733a1",
-    "/js/pages/tags/index.min.js": "/js/pages/tags/index.min.js?id=18f57046c70e0066591e4088aa1e9c59",
-    "/js/pages/tags/selected.min.js": "/js/pages/tags/selected.min.js?id=58457b15229ddb790ec1f6cf1e06a7fe",
-    "/js/auth/login.min.js": "/js/auth/login.min.js?id=9b3a5b3c0fe4034ecc9ea3333725c2ca",
-    "/js/pages/reset-password.min.js": "/js/pages/reset-password.min.js?id=36b65c7161d07aded0d3b9f8fe6e53ff",
-    "/js/admin.min.js": "/js/admin.min.js?id=2b08551beea688df4e0f83a9b64dacf8",
-    "/js/favorites.min.js": "/js/favorites.min.js?id=46d10a4c3626bc46a35f6e035f1c6315",
-    "/js/favorites-modal.min.js": "/js/favorites-modal.min.js?id=7a567c8852cfc8d5727419479b949c6e",
-    "/css/auth/login.min.css": "/css/auth/login.min.css?id=028be9bbe7e341eae142621573a6b875",
-    "/css/index.min.css": "/css/index.min.css?id=bfa52aac5da1369c25f872a760c7c7fd"
+    "/js/pages/index.min.js": "/js/pages/index.min.js?id=a2f6b3b926e218f4ed0e74e60329c133",
+    "/js/pages/user.min.js": "/js/pages/user.min.js?id=176df90a1bd0ae7871d2425183792454",
+    "/js/pages/author/index.min.js": "/js/pages/author/index.min.js?id=38b56f0fab248b16aae1ba612a9e2229",
+    "/js/pages/quotes/selected.min.js": "/js/pages/quotes/selected.min.js?id=293c192622fe19a2e22f7b5fa57f948b",
+    "/js/pages/tags/index.min.js": "/js/pages/tags/index.min.js?id=38b56f0fab248b16aae1ba612a9e2229",
+    "/js/pages/tags/selected.min.js": "/js/pages/tags/selected.min.js?id=293c192622fe19a2e22f7b5fa57f948b",
+    "/js/auth/login.min.js": "/js/auth/login.min.js?id=e3c3575e7d51b45de8cb944560c7fbd9",
+    "/js/pages/reset-password.min.js": "/js/pages/reset-password.min.js?id=a86190633d09f1eecdf47a0386e621a5",
+    "/js/admin.min.js": "/js/admin.min.js?id=2d41a2303e3cf92ee203c2fe4536c3f7",
+    "/js/favorites.min.js": "/js/favorites.min.js?id=7c522007a57ccb0812d5ee4318bc3ff7",
+    "/js/favorites-modal.min.js": "/js/favorites-modal.min.js?id=7a870071274e647f00eeeff93c128af4",
+    "/css/auth/login.min.css": "/css/auth/login.min.css?id=801041a73e939ac277fad0b110bdb58d",
+    "/css/index.min.css": "/css/index.min.css?id=650e300e1ba43650fd9fb501c278ea63"
 }

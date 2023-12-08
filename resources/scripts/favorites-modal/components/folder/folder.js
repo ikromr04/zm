@@ -1,19 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import style from './style.module.css'
+import CreateSubfolder from '../create-subfolder/create-subfolder'
 
 function Folder({ folder, setFolders }) {
-  const handleClick = () => {
-    setFolders((prevFolders) => {
-      return prevFolders.map((prevFolder) => {
-        if (prevFolder.id == folder.id) {
-          return {
-            ...prevFolder,
-            isChecked: !prevFolder.isChecked
+  const [isCreating, setIsCreating] = useState(false)
+
+  const handleClick = (evt) => {
+    if (!evt.target.closest('button')) {
+      setFolders((prevFolders) => {
+        return prevFolders.map((prevFolder) => {
+          if (prevFolder.id == folder.id) {
+            return {
+              ...prevFolder,
+              isChecked: !prevFolder.isChecked
+            }
           }
-        }
-        return prevFolder
+          return prevFolder
+        })
       })
-    })
+    }
   }
 
   const handleChildClick = (id) => () => {
@@ -51,7 +56,19 @@ function Folder({ folder, setFolders }) {
               <use xlinkHref="/images/stack.svg#unchecked" />
             </svg>}
         {folder.title}
+
+        <button
+          className={style.button}
+          type="button"
+          onClick={() => setIsCreating(true)}
+        >
+          <svg width={24} height={24}>
+            <use xlinkHref="/images/stack.svg#plus" />
+          </svg>
+          <span className={style.info}>Создать новую подпапку</span>
+        </button>
       </div>
+      {isCreating && <CreateSubfolder folder={folder} setIsCreating={setIsCreating} setFolders={setFolders} />}
       {folder?.children?.map((folder) => (
         <div key={folder.id} className={style.child} onClick={handleChildClick(folder.id)}>
           {folder?.isChecked
