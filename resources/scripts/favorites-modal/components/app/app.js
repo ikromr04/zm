@@ -2,24 +2,51 @@ import { useEffect, useState } from 'react';
 import style from './style.module.css'
 import Folder from '../folder/folder';
 import MainFolder from '../main-folder/main-folder';
+import axios from 'axios';
 
 function App() {
   const [folders, setFolders] = useState(JSON.parse(document.querySelector('#folders')?.dataset.value))
   const [isShown, setIsShown] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
+  const [quote, setQuote] = useState(null)
 
   window.showFavoriteModal = (evt) => {
+    const main = JSON.parse(evt.target.dataset.all)
+    const quote = JSON.parse(evt.target.dataset.quote)
+    let quoteFolders = JSON.parse(evt.target.dataset.folders)
+    quoteFolders = quoteFolders.map(({ id }) => id)
+    !main ? setIsChecked(false) : setIsChecked(true)
+    quoteFolders.length && setIsChecked(true)
+    setQuote(quote)
     setIsShown(true)
-  }
-
-  useEffect(() => {
     setFolders(folders?.map(({ id, title, children }) => ({
-      id, title, isChecked: false,
+      id, title, isChecked: quoteFolders.includes(id),
       children: children.map(({ id, title }) => ({
-        id, title, isChecked: false
+        id, title, isChecked: quoteFolders.includes(id)
       }))
     })))
-  }, [])
+  }
+
+  const handleSubmitClick = (evt) => {
+    const ids = []
+    isChecked && ids.push('')
+    folders.forEach((folder) => {
+      folder.isChecked && ids.push(folder.id)
+      folder?.children.forEach((child) => child.isChecked && ids.push(child.id))
+    });
+
+    evt.target.setAttribute('data-loading', 'loading');
+
+    axios.post('/favorites', { quote_id: quote.id, ids })
+      .then(() => {
+        window.location.reload()
+        evt.target.removeAttribute('data-loading');
+      })
+      .catch(({ response }) => {
+        console.error(response.data.message);
+        evt.target.removeAttribute('data-loading');
+      })
+  }
 
   if (!isShown) {
     return null
@@ -47,7 +74,8 @@ function App() {
           style={{
             maxWidth: 'none',
             marginTop: '32px'
-           }}
+          }}
+          onClick={handleSubmitClick}
         >
           Сохранить
         </button>
