@@ -164,21 +164,11 @@ class UserController extends Controller
 
   public function resetPasswordSubmit(Request $request)
   {
-    if (!request('email')) {
-      return response(['email' => 'Это поле обязательное'], 400);
-    }
-    if (!request('password')) {
-      return response(['password' => 'Это поле обязательное'], 400);
-    }
-    if (!request('confirm_password')) {
-      return response(['confirm_password' => 'Это поле обязательное'], 400);
-    }
-    if (request('password') != request('confirm_password')) {
-      return response([
-        'password' => 'Пароли не совпадают',
-        'confirm_password' => 'Пароли не совпадаюте'
-      ], 400);
-    }
+    $request->validate([
+      'email' => 'required|email',
+      'password' => 'required|string|min:8|required_with:confirm_password|same:confirm_password',
+      'confirm_password' => 'required|string|min:8|required_with:password|same:password',
+    ]);
 
     $user = User::where('email', '=', $request->email)->first();
 
@@ -264,8 +254,8 @@ class UserController extends Controller
   {
     request()->validate([
       'password' => 'required',
-      'new_password' => 'required|required_with:password_confirm|same:password_confirm',
-      'password_confirm' => 'required'
+      'new_password' => 'required|string|min:8|required_with:password_confirm|same:password_confirm',
+      'password_confirm' => 'required|string|min:8|required_with:new_password|same:new_password'
     ]);
 
     $user = User::find($userId);
