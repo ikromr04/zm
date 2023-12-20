@@ -21,10 +21,11 @@ class TagsSeeder extends Seeder
       array('id' => '4', 'group_id' => null, 'title' => 'Просвещение','slug' => 'nauka-i-prosveshchenie','created_at' => '2023-09-13 08:09:54','updated_at' => '2023-09-19 10:09:54'),
       array('id' => '5', 'group_id' => null, 'title' => 'Общество','slug' => 'obshchestvo','created_at' => '2023-09-13 08:10:03','updated_at' => '2023-09-13 08:10:03'),
 
-      array('id' => '2', 'title' => 'Мировоззрение', 'slug' => 'mirovozzrenie', 'group_id' => '3', 'created_at' => '2023-09-03 18:51:59', 'updated_at' => '2023-09-13 08:15:01'),
-      array('id' => '3', 'title' => 'Жизнелюбие', 'slug' => 'zhiznelyubie', 'group_id' => '3', 'created_at' => '2023-09-03 18:51:59', 'updated_at' => '2023-09-13 08:14:13'),
-      array('id' => '4', 'title' => 'Личностный рост', 'slug' => 'razvitie-lichnosti', 'group_id' => '3', 'created_at' => '2023-09-03 18:51:59', 'updated_at' => '2023-10-16 04:49:15'),
-      array('id' => '5', 'title' => 'Ценность жизни', 'slug' => 'cennost-zhizni', 'group_id' => '1', 'created_at' => '2023-09-03 18:51:59', 'updated_at' => '2023-09-13 08:11:55'),
+      array('id' => '75', 'title' => 'Мировоззрение', 'slug' => 'mirovozzrenie', 'group_id' => '3', 'created_at' => '2023-09-03 18:51:59', 'updated_at' => '2023-09-13 08:15:01'),
+      array('id' => '76', 'title' => 'Жизнелюбие', 'slug' => 'zhiznelyubie', 'group_id' => '3', 'created_at' => '2023-09-03 18:51:59', 'updated_at' => '2023-09-13 08:14:13'),
+      array('id' => '77', 'title' => 'Личностный рост', 'slug' => 'razvitie-lichnosti', 'group_id' => '3', 'created_at' => '2023-09-03 18:51:59', 'updated_at' => '2023-10-16 04:49:15'),
+      array('id' => '78', 'title' => 'Ценность жизни', 'slug' => 'cennost-zhizni', 'group_id' => '1', 'created_at' => '2023-09-03 18:51:59', 'updated_at' => '2023-09-13 08:11:55'),
+
       array('id' => '7', 'title' => 'Человечество', 'slug' => 'celi-cheloveka', 'group_id' => '5', 'created_at' => '2023-09-03 18:51:59', 'updated_at' => '2023-10-16 04:54:34'),
       array('id' => '8', 'title' => 'Человечность', 'slug' => 'chelovechnost', 'group_id' => '1', 'created_at' => '2023-09-03 18:51:59', 'updated_at' => '2023-09-03 18:51:59'),
       array('id' => '9', 'title' => 'Наука и Учения', 'slug' => 'nauka-i-prosveshchenie', 'group_id' => '4', 'created_at' => '2023-09-03 18:51:59', 'updated_at' => '2023-10-19 04:39:09'),
@@ -81,6 +82,7 @@ class TagsSeeder extends Seeder
 
     foreach ($tags as $tag) {
       Tag::create([
+        'id' => $tag['id'],
         'title' => $tag['title'],
         'parent_id' => $tag['group_id'],
       ]);
