@@ -11,6 +11,7 @@ function App() {
   const [isChecked, setIsChecked] = useState(false)
   const [quote, setQuote] = useState(null)
   const [isCreating, setIsCreating] = useState(false)
+  const [isDisabled, setIsDisabled] = useState(false)
 
   window.showFavoriteModal = (evt) => {
     const main = JSON.parse(evt.target.dataset.all)
@@ -61,18 +62,19 @@ function App() {
         <MainFolder isChecked={isChecked} setIsChecked={setIsChecked} />
 
         {isCreating &&
-          <CreateFolder setIsCreating={setIsCreating} setFolders={setFolders} />}
+          <CreateFolder setIsCreating={setIsCreating} setFolders={setFolders} setIsDisabled={setIsDisabled} />}
 
         <div className={style.folders}>
           {folders?.map((folder) => (
             <Folder
               key={folder.id}
               setFolders={setFolders}
+              setIsDisabled={setIsDisabled}
               folder={folder} />
           ))}
         </div>
 
-        <button className={style.newFolder} type="button" onClick={() => setIsCreating(true)}>
+        <button className={style.newFolder} type="button" onClick={() => {setIsCreating(true); setIsDisabled(true)}}>
           <svg width={24} height={24}>
             <use xlinkHref="/images/stack.svg#plus" />
           </svg>
@@ -84,6 +86,7 @@ function App() {
           type="button"
           style={{ maxWidth: 'none' }}
           onClick={handleSubmitClick}
+          disabled={isDisabled}
         >
           Сохранить
         </button>
