@@ -12,9 +12,9 @@
       <a onclick="window.showPrivacyPolicyModal()">@lang('Политика конфиденциальности')</a>
     </div>
 
-    <p class="page-footer__feedback">
-      @lang('Обратная связь') <br>
-      <a href="mailto:info@zafarmirzo.com">info@zafarmirzo.com</a>
-    </p>
+    <div class="page-footer__links">
+      <div>@lang('Обратная связь'): <a href="mailto:info@zafarmirzo.com">info@zafarmirzo.com</a></div>
+        <div><a href="https://zafarmirzo.com/">zafarmirzo.com</a></div>
+    </div>
   </div>
 </footer>

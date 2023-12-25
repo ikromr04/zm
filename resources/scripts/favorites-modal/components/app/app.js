@@ -60,7 +60,8 @@ function App() {
 
         <MainFolder isChecked={isChecked} setIsChecked={setIsChecked} />
 
-        {isCreating && <CreateFolder setIsCreating={setIsCreating} setFolders={setFolders} />}
+        {isCreating &&
+          <CreateFolder setIsCreating={setIsCreating} setFolders={setFolders} />}
 
         <div className={style.folders}>
           {folders?.map((folder) => (
