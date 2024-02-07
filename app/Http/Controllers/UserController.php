@@ -30,21 +30,21 @@ class UserController extends Controller
       'password' => bcrypt(request('password')),
     ]);
 
-    $token = Str::random(64);
+    // $token = Str::random(64);
 
-    DB::table('verify_email')->insert([
-      'token' => $token,
-      'user_id' => $user->id,
-    ]);
+    // DB::table('verify_email')->insert([
+    //   'token' => $token,
+    //   'user_id' => $user->id,
+    // ]);
 
-    Mail::send('emails.verify-email', [
-      'token' => $token,
-      'user' => $user,
-      'password' => $request->password,
-    ], function ($message) use ($request) {
-      $message->to($request->email);
-      $message->subject('Добро пожаловать на сайт zafarmirzo.com!');
-    });
+    // Mail::send('emails.verify-email', [
+    //   'token' => $token,
+    //   'user' => $user,
+    //   'password' => $request->password,
+    // ], function ($message) use ($request) {
+    //   $message->to($request->email);
+    //   $message->subject('Добро пожаловать на сайт zafarmirzo.com!');
+    // });
 
     session()->put('user', $user);
 
